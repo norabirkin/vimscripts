@@ -229,7 +229,7 @@ function! s:ReplaceStoreGetter(oldClassName, newClassName)
     let result = <SID>Grep('\b'.oldGetter.'\b', '.', 'R')
     for item in result
         call <SID>OpenGrepResultItem(item)
-        call <SID>FindInBuffer()
+        call <SID>FindInBuffer('\<'.oldGetter.'\>')
         call <SID>ReplaceWord(oldGetter, newGetter)
     endfor
 endfunction
@@ -238,7 +238,7 @@ function! s:ReplaceStoreProperty(oldClassName, newClassName)
     let shortenedOldClassName = <SID>GetShortenedClassName(a:oldClassName)
     let shortenedNewClassName = <SID>GetShortenedClassName(a:newClassName)
     let shortenedOldClassNameInQuotes = <SID>InQuotesForGrep(shortenedOldClassName)
-    let result = <SID>Grep('^'.spaces.'store'.spaces.':'.spaces.shortenedOldClassNameInQuotes)
+    let result = <SID>Grep('^'.s:spaces.'store'.s:spaces.':'.s:spaces.shortenedOldClassNameInQuotes, '.', 'ER')
     for item in result
         call <SID>OpenGrepResultItem(item)
         call <SID>ReplaceInsideQuotes(shortenedOldClassName, shortenedNewClassName)
@@ -262,6 +262,7 @@ function! s:GetStoreGetter(className)
         let getter = getter.<SID>Capitalize(item)
     endfor
     let getter = getter.'Store'
+    return getter
 endfunction
 
 function! s:ViewSpecialRenamingCases(oldClassName, newClassName)
@@ -326,6 +327,7 @@ endfunction
 
 function! s:OpenGrepResultItem(item)
     if a:item.lnum > 0
+        execute "normal!:w\<cr>"
         execute "normal!:b".a:item.bufnr."\<cr>:".a:item.lnum."\<cr>"
         return 1
     endif
