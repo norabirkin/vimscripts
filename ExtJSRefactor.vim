@@ -9,17 +9,112 @@ nnoremap ;tc :call<SID>LocalizeConfirm()<cr>
 nnoremap ;tu :call<SID>LocalizeRus('messages')<cr>
 nnoremap ;tt :call<SID>Localize('messages')<cr>
 nnoremap ;te :call<SID>Localize('errors')<cr>
+nnoremap ;tf :call<SID>FindLocalization()<cr>
 nnoremap ;to :call<SID>OpenLocalizationFile('messages')<cr>
 nnoremap ;tr :call<SID>OpenLocalizationFile('errors')<cr>
+nnoremap ;tp :call<SID>FindItTariffTpl()<cr>
 nnoremap ;tg :call<SID>LocalizeGettext()<cr>
+nnoremap ;ta :call<SID>FindInOldAdminLocalization()<cr>
+nnoremap ;tn :call<SID>ConfirmOldLocalization()<cr>
 nnoremap ;tw :call<SID>WrapWithT()<cr>
 nnoremap ;ou :w<cr>:e ~/lb/admin2/admin-2_0-oss/protected/runtime/vardump.log<cr>
 nnoremap ;rt :call<SID>GrepTabs()<cr>
 nnoremap ;fg :call<SID>FindRefGetter()<cr>
+nnoremap ;fr :call<SID>FindRussian()<cr>
 nnoremap ;rg :call<SID>RefGetter()<cr>
+nnoremap ;sg :call<SID>StoreGetter()<cr>
 nnoremap ;ty :call<SID>LocalizeInBuffer(@@)<cr>
 nnoremap ;tj :call<SID>NextT()<cr>
-nmap ;aa vg_S<pre>
+nnoremap ;aa :call<SID>ReplaceUsWithUx()<cr>
+nnoremap ;ii :call<SID>ReplaceWithNewLocalization()<cr>
+
+function! s:ReplaceUsWithUx()
+    let result = <SID>Grep('OSS.us.HeadMsg', '.', 'R')
+    let bufnr = -1
+    for i in result
+        if bufnr != i.bufnr
+            call <SID>OpenGrepResultItem(i)
+            execute "normal!:%s/OSS.us.HeadMsg/OSS.ux.HeadMsg/g\<cr>:w"
+            let bufnr = i.bufnr
+        endif
+    endfor
+endfunction
+
+function! s:ReplaceAlert()
+    call <SID>SaveRegister()
+    call <SID>FindInBuffer('Ext.Msg.alert(')
+    execute "normal!mmf(f,l\"jdt)`mvf(%sOSS.us.HeadMsg.show(\<c-r>j)"
+    call <SID>RestoreRegister()
+endfunction
+
+function! s:ReplaceWithNewLocalization()
+    call <SID>SaveRegister()
+    call <SID>FindInBuffer('\.get(')
+    execute "normal!t(v?Ext\\|OSS\<cr>si18n.get"
+    call <SID>RestoreRegister()
+endfunction
+
+function! s:FindRussian()
+    call <SID>FindInBuffer('[а-яА-Я]')
+    execute "normal!h"
+endfunction
+
+function! s:FindLocalization()
+    call <SID>SaveRegister()
+    let str = <SID>YankInQuotes()
+    let str = <SID>InQuotes(str)
+    call <SID>OpenLocalizationFile('messages')
+    call <SID>FindInBuffer(str)
+    execute "normal!^f>"
+    let @j = <SID>YankInQuotes()
+    call <SID>RestoreRegister()
+endfunction
+
+function! s:AppendString()
+    let str = <SID>YankInQuotes()
+    let @j = @j.str."\n"
+endfunction
+
+let s:en = ''
+let s:ru = ''
+
+function! s:StoreGetter()
+    call <SID>SaveRegister()
+    let className = <SID>YankInQuotes()
+    let @j = <SID>GetStoreGetter(className)
+    call <SID>RestoreRegister()
+endfunction
+
+function! s:FindItTariffTpl()
+    call <SID>SaveRegister()
+    execute "normal!ye"
+    let text = @@
+    call <SID>OpenFile('/home/anshakov/lb/20/admin/localizes/ru/tpls/tarif.tpl')
+    call <SID>GoToTop()
+    call <SID>FindInBuffer('\<'.text.'\>')
+    execute "normal!f@llvt%hy"
+    let @j = "i18n.get('".@@."')"
+    call <SID>RestoreRegister()
+endfunction
+
+function! s:ConfirmOldLocalization()
+    call <SID>SaveRegister()
+    call <SID>FindInBuffer('"ru"')
+    execute "normal!j^f>lyt<"
+    let s:ru = @@
+    call <SID>OpenLocalizationFile('messages')
+    call <SID>AddLine("    '".s:en."' => '".s:ru."',")
+    execute "normal!:w\<cr>"
+    call <SID>RestoreRegister()
+endfunction
+
+function! s:FindInOldAdminLocalization()
+    call <SID>SaveRegister()
+    let s:en = <SID>YankInQuotes()
+    call <SID>OpenFile('/home/anshakov/lb/20/admin/localizes/localize.xml')
+    call <SID>FindInBuffer('"'.s:en.'"')
+    call <SID>RestoreRegister()
+endfunction
 
 function! s:WrapLikeArrItem()
     call <SID>SaveRegister()
@@ -364,7 +459,7 @@ function! s:GetBasePath(base)
 endfunction
 
 function! s:OpenFile(path)
-    execute "normal!:e ".a:path."\<cr>"
+    execute "normal!:w\<cr>:e ".a:path."\<cr>"
 endfunction
 
 function! s:OpenBackAndController()
