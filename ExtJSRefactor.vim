@@ -25,8 +25,103 @@ nnoremap ;rg :call<SID>RefGetter()<cr>
 nnoremap ;sg :call<SID>StoreGetter()<cr>
 nnoremap ;ty :call<SID>LocalizeInBuffer(@@)<cr>
 nnoremap ;tj :call<SID>NextT()<cr>
-nnoremap ;aa :call<SID>ReplaceUsWithUx()<cr>
+nnoremap ;aa :call<SID>ReqParams()<cr>
+nnoremap ;sf :call<SID>FromSystemGetFunctors()<cr>
+nnoremap ;sp :call<SID>FromSystemGetFunctorsForBackEnd()<cr>
 nnoremap ;ii :call<SID>ReplaceWithNewLocalization()<cr>
+nnoremap ;sc :call<SID>SetController()<cr>
+nnoremap ;ir :call<SID>ItemRegister()<cr>
+
+let s:controller = ''
+
+function! s:ItemRegister()
+    let path = expand('%')
+    let exploded = split(path, '/')
+    let className = <SID>GetClassName()
+    let shortenedClassName = <SID>GetShortenedClassName(className)
+    if exploded[0] == 'store'
+        let prop = 'stores'
+    elseif exploded[0] == 'view'
+        let prop = 'views'
+    else
+        return 0
+    endif
+    call <SID>OpenFile(s:controller)
+    call <SID>GoToTop()
+    call <SID>FindInBuffer('    '.prop.':')
+    execute "normal!o    '".shortenedClassName."',"
+    call <SID>OpenFile(path)
+endfunction
+
+function! s:SetController()
+    let s:controller = expand("%")
+endfunction
+
+function! s:FromSystemGetFunctorsForBackEnd()
+    call <SID>SaveRegister()
+    execute "normal!^yi'"
+    let field = @@
+    execute "normal!f>wyg_"
+    let val = @@
+    if val == '0'
+        let type = 'int'
+    elseif val == "''"
+        let type = 'string'
+    elseif val == "0.0"
+        let type = 'float'
+    elseif val == "false"
+        let type = 'bool'
+    endif
+    execute "normal!Vs'".field."' => (".type.") $this->param('".field."'),\<esc>j"
+    call <SID>RestoreRegister()
+endfunction
+
+function! s:FromSystemGetFunctors()
+    call <SID>SaveRegister()
+    execute "normal!^yi'"
+    let field = @@
+    execute "normal!f>wyg_"
+    let val = @@
+    if val == '0'
+        let type = 'int'
+    elseif val == "''"
+        let type = 'string'
+    elseif val == "0.0"
+        let type = 'float'
+    elseif val == "false"
+        let type = 'bool'
+    endif
+    execute "normal!Vs{\<cr>name: '".field."',\<cr>type: '".type."'\<cr>},\<esc>j^"
+    call <SID>RestoreRegister()
+endfunction
+
+function! s:ReqParams()
+    execute "normal!^f>wmmf'\"jyi'`mcg_(int) $this->param('\<c-r>j'),\<esc>j"
+endfunction
+
+function! s:SaveParams()
+    execute "normal!^\"jyi'f>wcg_$item['\<c-r>j']\<esc>j"
+endfunction
+
+function! s:Reformat()
+    execute "normal!^@d@n@x/{\<cr>"
+endfunction
+
+function! s:RestoreParams()
+    execute "normal!^yi'f'a => yii::app()->lanbilling->clientInfo->account->\<c-r>\"\<esc>j"
+endfunction
+
+function! s:Editable()
+    execute "normal!/display\<cr>hcf'yii::app()->params['editBankDetails'] ? 'text' : 'display'\<esc>/array\<cr>"
+endfunction
+
+function! s:SetNames()
+    execute "normal!2j^/account\<cr>f>l\"jyeO'name' => '\<c-r>j'\<esc>/array\<cr>"
+endfunction
+
+function! s:Fields()
+    execute "normal!2jf>/account\<cr>f>l\"jyej^f>w\"kyi'?array\<cr>Vf(%s\<c-r>j '\<c-r>k'\<esc>j^"
+endfunction
 
 function! s:ReplaceUsWithUx()
     let result = <SID>Grep('OSS.us.HeadMsg', '.', 'R')
