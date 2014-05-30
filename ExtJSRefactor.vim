@@ -15,6 +15,7 @@ nnoremap ;tr :call<SID>OpenLocalizationFile('errors')<cr>
 nnoremap ;tp :call<SID>FindItTariffTpl()<cr>
 nnoremap ;tg :call<SID>LocalizeGettext()<cr>
 nnoremap ;ta :call<SID>FindInOldAdminLocalization()<cr>
+nnoremap ;td :call<SID>AddToOldAdminLocalization()<cr>
 nnoremap ;tn :call<SID>ConfirmOldLocalization()<cr>
 nnoremap ;tw :call<SID>WrapWithT()<cr>
 nnoremap ;ou :w<cr>:e ~/lb/admin2/admin-2_0-oss/protected/runtime/vardump.log<cr>
@@ -25,12 +26,68 @@ nnoremap ;rg :call<SID>RefGetter()<cr>
 nnoremap ;sg :call<SID>StoreGetter()<cr>
 nnoremap ;ty :call<SID>LocalizeInBuffer(@@)<cr>
 nnoremap ;tj :call<SID>NextT()<cr>
-nnoremap ;aa :call<SID>ReqParams()<cr>
+nnoremap ;sj :call<SID>SnippetJoin()<cr>
 nnoremap ;sf :call<SID>FromSystemGetFunctors()<cr>
 nnoremap ;sp :call<SID>FromSystemGetFunctorsForBackEnd()<cr>
 nnoremap ;ii :call<SID>ReplaceWithNewLocalization()<cr>
 nnoremap ;sc :call<SID>SetController()<cr>
 nnoremap ;ir :call<SID>ItemRegister()<cr>
+nnoremap ;aa :call<SID>CreateFake()<cr>
+nnoremap ;aj :call<SID>CreateFake1()<cr>
+nnoremap ;ax ^r'f]r'
+nnoremap ;an ^Js\n<esc>^
+nnoremap ;ak /{[a-z]\+}<cr>
+nnoremap ;k{ vi{<esc>`<
+nnoremap ;br :call<SID>BorderRadius()<cr>
+nnoremap ;rd :call<SID>Gradient()<cr>
+
+function! s:CreateFake1()
+    execute "normal!ma/(\<cr>\"jyi('aVj^%doObj::get(array(\<cr>)),\<esc>ko\<esc>\"jp"
+endfunction
+
+function! s:CreateFake()
+    execute "normal!^\"jyi[f>w\"kyg_^cg_'\<c-r>j' => '\<c-r>k',\<esc>j"
+endfunction
+
+function! s:Gradient()
+    call <SID>SaveRegister()
+    execute "normal!^yg_"
+    let radius = @@
+    let exploded = split(radius, ' ')
+    execute "normal!^vg_sbackground-image: -moz-linear-gradient(top, ".exploded[0].", ".exploded[1].");\<cr>background-image: -ms-linear-gradient(top, ".exploded[0].", ".exploded[1].");\<cr>background-image: -webkit-gradient(linear, 0 0, 0 100%, from(".exploded[0]."), to(".exploded[1]."));\<cr>background-image: -webkit-linear-gradient(top, ".exploded[0].", ".exploded[1].");\<cr>background-image: -o-linear-gradient(top, ".exploded[0].", ".exploded[1].");\<cr>background-image: linear-gradient(top, ".exploded[0].", ".exploded[1].");\<cr>background-repeat: repeat-x;\<cr>filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='".exploded[0]."', endColorstr='".exploded[1]."', GradientType=0);"
+    call <SID>RestoreRegister()
+endfunction
+
+function! s:BorderRadius()
+    call <SID>SaveRegister()
+    execute "normal!^yg_"
+    let radius = @@
+    let exploded = split(radius, ' ')
+    let arr = []
+    for i in exploded
+        if  i == 0
+            let item = 0
+        else
+            let item = i.'px'
+        endif
+        let arr += [item]
+    endfor
+    let str = join(arr, ' ')
+    execute "normal!^vg_s-webkit-border-radius: ".str.";\<cr>-moz-border-radius: ".str.";\<cr>border-radius: ".str.";"
+    call <SID>RestoreRegister()
+endfunction
+
+function! s:AddToOldAdminLocalization()
+    call <SID>SaveRegister()
+    let s:en = <SID>YankInQuotes()
+    call <SID>OpenFile('/home/anshakov/lb/20/admin/localizes/localize.xml')
+    execute "normal!Gkko<tu tuid=\"".s:en."\" datatype=\"plaintext\">\<cr>\<tab><tuv xml:lang=\"en\">\<cr>\<tab><seg>".s:en."</seg>\<cr>\<bs>\<bs>\<bs>\<bs></tuv>\<cr><tuv xml:lang=\"ru\">\<cr>\<tab><seg></seg>\<cr>\<bs>\<bs>\<bs>\<bs></tuv>\<cr>\<bs>\<bs>\<bs>\<bs></tu>\<esc>kkf>"
+    call <SID>RestoreRegister()
+endfunction
+
+function! s:SnippetJoin()
+    execute "normal!Js\\<cr>"
+endfunction
 
 let s:controller = ''
 

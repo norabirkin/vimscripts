@@ -1,0 +1,16 @@
+--- Infoblock.php	(revision 42942)
++++ Infoblock.php	(revision 43111)
+@@ -135,11 +135,12 @@
+             );
+         }
+         if ($item = $this->messages()) {
++            mb_internal_encoding("UTF-8");
+             $data[] = array(
+                 'rawtime' => strtotime($item->posttime),
+                 'time' => $this->time($item->posttime),
+                 'descr' => CHtml::link($this->t('Message recieved: {message}', array(
+-                    '{message}' => trim(strlen($item->text) > $this->messageLimit() ? substr($item->text, 0, ($this->messageLimit() - 3).'...') : $item->text)
++                    '{message}' => trim(mb_strlen($item->text) > $this->messageLimit() ? mb_substr($item->text, 0, ($this->messageLimit() - 3)).'...' : $item->text)
+                 )), $this->messageUrl($item))
+             );
+         }

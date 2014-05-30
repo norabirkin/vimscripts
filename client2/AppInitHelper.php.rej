@@ -1,0 +1,11 @@
+--- AppInitHelper.php	(revision 42942)
++++ AppInitHelper.php	(revision 43111)
+@@ -118,7 +118,7 @@
+     }
+     
+     private function noAgreementsMessage() {
+-        return Yii::t('messages','There is no available agreements. Please contact your manager.');
++        return Yii::t('main','There is no available agreements. Please contact your manager.');
+     }
+     
+ } ?>

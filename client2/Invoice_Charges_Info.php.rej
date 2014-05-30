@@ -1,0 +1,48 @@
+--- Invoice_Charges_Info.php	(revision 42942)
++++ Invoice_Charges_Info.php	(revision 43111)
+@@ -56,9 +56,15 @@
+         }
+         return $data;
+     }
++    private function firstCol($title) {
++        return array(
++            'width' => '33%',
++            'title' => $title
++        );
++    }
+     protected function  servTable($tarTotal) {
+         $columns = array(
+-            'zone_descr' => 'Service'
++            'zone_descr' => $this->firstCol('Service')
+         );
+         if (yii::app()->params['utility_stat_enabled']) {
+             if (yii::app()->params['utility_stat_external']) {
+@@ -74,8 +80,7 @@
+             'top' => 40,
+             'data' => $this->servData($tarTotal),
+             'processor' => array($this, 'servRow'),
+-            'hideOnEmpty' => true,
+-            'fixSecondColumn' => true
++            'hideOnEmpty' => true
+         ));
+     }
+     protected function  table() {
+@@ -83,7 +88,7 @@
+     }
+     protected function  tarTable() {
+         $columns = array(
+-            'tar_descr' => 'Tariff'
++            'tar_descr' => $this->firstCol('Tariff')
+         );
+         if (yii::app()->params['utility_stat_enabled']) {
+             if (yii::app()->params['utility_stat_external']) {
+@@ -101,8 +106,7 @@
+             'top' => 40,
+             'processor' => array($this, 'tarRow'),
+             'displayPaging' => false,
+-            'hideOnEmpty' => true,
+-            'fixSecondColumn' => true
++            'hideOnEmpty' => true
+         ));
+     }
+     public function tarRow($row) {

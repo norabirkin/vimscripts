@@ -1,0 +1,14 @@
+--- config.php	(revision 42942)
++++ config.php	(revision 43111)
+@@ -224,11 +224,6 @@
+         'title' => 'Other services',
+         'items' => array(
+             array(
+-                'action' => 'managing',
+-                'title' => 'Managing services',
+-                'description' => 'It is section, where you can manage services'
+-            ),
+-            array(
+                 'action' => 'tariffChanging',
+                 'title' => 'Tariff changing',
+                 'description' => 'It is tariff changing section, where you can change tariff.',

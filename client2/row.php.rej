@@ -1,0 +1,14 @@
+--- row.php	(revision 42942)
++++ row.php	(revision 43111)
+@@ -1,7 +1,5 @@
+- <tr class="<?php echo $class; ?>">
+-      <?php $index = 0; foreach( $columns as $column ) { ?>
+-      <td<?php if ($index == 0) { ?> class="first_col"<?php } ?> <?php if ($index == 1 && $fixSecondColumn==true) { ?> width="33%"<?php } ?>>
+-      	<?php echo $column; ?>
+-      </td>
+-      <?php $index += 1; } ?>
+-  </tr>+<tr class="<?php echo $class; ?>">
++    <?php $first = true; foreach( $columns as $column ) { ?>
++    <td<?php if ($first) { ?> class="first_col"<?php } ?>><?php echo $column; ?></td>
++    <?php $first = false; } ?>
++</tr>
