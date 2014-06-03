@@ -1,0 +1,14 @@
+--- Other_Services.php	(revision 42942)
++++ Other_Services.php	(revision 43111)
+@@ -13,9 +13,9 @@
+         }
+         $html = $this->notBindedServiceFunctionsGrid().$html;
+         if (!($html = $html . $this->outputVgroupServices())) {
+-            return $this->t('No services found');
++            $html = $this->t('No services found');
+         }
+-        return $html;
++        return yii::app()->controller->getPage()->menu().$html;
+     }
+     private function outputVgroupServices() {
+         $grid = new DTV_Services_Grid(array(

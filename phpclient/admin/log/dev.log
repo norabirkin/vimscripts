@@ -1,0 +1,252 @@
+
+2014-06-03 17:41:28
+
+getSbssTicket [REQUEST]
+2014-06-03 17:41:28
+
+Array
+(
+    [id] => 199
+)
+
+2014-06-03 17:41:28
+
+getSbssTicket [RESPONSE]
+2014-06-03 17:41:28
+
+stdClass Object
+(
+    [ticket] => stdClass Object
+        (
+            [id] => 199
+            [authortype] => 0
+            [authorid] => 0
+            [respondenttype] => 0
+            [respondentid] => 0
+            [responsibleman] => 0
+            [classid] => 1
+            [replies] => 0
+            [statusid] => 2
+            [managerlock] => 0
+            [filescount] => 0
+            [name] => тест писем!
+            [createdon] => 2013-02-26 18:33:28
+            [lastpost] => 2013-02-26 18:33:28
+            [classname] => Новый класс
+            [classcolor] => 
+            [authorname] => 
+            [respondentname] => 
+            [authormail] => 
+            [managerlockname] => Администратор
+            [responsiblemanname] => Администратор
+        )
+
+    [posts] => stdClass Object
+        (
+            [post] => stdClass Object
+                (
+                    [id] => 183
+                    [ticketid] => 199
+                    [authortype] => 0
+                    [authorid] => 0
+                    [spec] => 0
+                    [statusid] => 0
+                    [responsibleman] => 0
+                    [createdon] => 2013-02-26 18:33:28
+                    [text] => Тестиииииииииинг!!!!
+                    [authorname] => 
+                    [responsiblemanname] => 
+                )
+
+        )
+
+)
+
+2014-06-03 17:41:43
+
+getSbssTicket [REQUEST]
+2014-06-03 17:41:43
+
+Array
+(
+    [id] => 199
+)
+
+2014-06-03 17:41:43
+
+getSbssTicket [RESPONSE]
+2014-06-03 17:41:43
+
+stdClass Object
+(
+    [ticket] => stdClass Object
+        (
+            [id] => 199
+            [authortype] => 0
+            [authorid] => 0
+            [respondenttype] => 0
+            [respondentid] => 0
+            [responsibleman] => 0
+            [classid] => 1
+            [replies] => 0
+            [statusid] => 2
+            [managerlock] => 0
+            [filescount] => 0
+            [name] => тест писем!
+            [createdon] => 2013-02-26 18:33:28
+            [lastpost] => 2013-02-26 18:33:28
+            [classname] => Новый класс
+            [classcolor] => 
+            [authorname] => 
+            [respondentname] => 
+            [authormail] => 
+            [managerlockname] => Администратор
+            [responsiblemanname] => Администратор
+        )
+
+    [posts] => stdClass Object
+        (
+            [post] => stdClass Object
+                (
+                    [id] => 183
+                    [ticketid] => 199
+                    [authortype] => 0
+                    [authorid] => 0
+                    [spec] => 0
+                    [statusid] => 0
+                    [responsibleman] => 0
+                    [createdon] => 2013-02-26 18:33:28
+                    [text] => Тестиииииииииинг!!!!
+                    [authorname] => 
+                    [responsiblemanname] => 
+                )
+
+        )
+
+)
+
+2014-06-03 17:44:54
+
+getSbssTicket [REQUEST]
+2014-06-03 17:44:54
+
+Array
+(
+    [id] => 199
+)
+
+2014-06-03 17:44:54
+
+getSbssTicket [RESPONSE]
+2014-06-03 17:44:54
+
+stdClass Object
+(
+    [ticket] => stdClass Object
+        (
+            [id] => 199
+            [authortype] => 0
+            [authorid] => 0
+            [respondenttype] => 0
+            [respondentid] => 0
+            [responsibleman] => 0
+            [classid] => 1
+            [replies] => 0
+            [statusid] => 2
+            [managerlock] => 0
+            [filescount] => 0
+            [name] => тест писем!
+            [createdon] => 2013-02-26 18:33:28
+            [lastpost] => 2013-02-26 18:33:28
+            [classname] => Новый класс
+            [classcolor] => 
+            [authorname] => 
+            [respondentname] => 
+            [authormail] => 
+            [managerlockname] => Администратор
+            [responsiblemanname] => Администратор
+        )
+
+    [posts] => stdClass Object
+        (
+            [post] => stdClass Object
+                (
+                    [id] => 183
+                    [ticketid] => 199
+                    [authortype] => 0
+                    [authorid] => 0
+                    [spec] => 0
+                    [statusid] => 0
+                    [responsibleman] => 0
+                    [createdon] => 2013-02-26 18:33:28
+                    [text] => Тестиииииииииинг!!!!
+                    [authorname] => 
+                    [responsiblemanname] => 
+                )
+
+        )
+
+)
+
+2014-06-03 17:46:48
+
+getSbssTicket [REQUEST]
+2014-06-03 17:46:48
+
+Array
+(
+    [id] => 199
+)
+
+2014-06-03 17:46:48
+
+getSbssTicket [RESPONSE]
+2014-06-03 17:46:48
+
+stdClass Object
+(
+    [ticket] => stdClass Object
+        (
+            [id] => 199
+            [authortype] => 0
+            [authorid] => 0
+            [respondenttype] => 0
+            [respondentid] => 0
+            [responsibleman] => 0
+            [classid] => 1
+            [replies] => 0
+            [statusid] => 2
+            [managerlock] => 0
+            [filescount] => 0
+            [name] => тест писем!
+            [createdon] => 2013-02-26 18:33:28
+            [lastpost] => 2013-02-26 18:33:28
+            [classname] => Новый класс
+            [classcolor] => 
+            [authorname] => 
+            [respondentname] => 
+            [authormail] => 
+            [managerlockname] => Администратор
+            [responsiblemanname] => Администратор
+        )
+
+    [posts] => stdClass Object
+        (
+            [post] => stdClass Object
+                (
+                    [id] => 183
+                    [ticketid] => 199
+                    [authortype] => 0
+                    [authorid] => 0
+                    [spec] => 0
+                    [statusid] => 0
+                    [responsibleman] => 0
+                    [createdon] => 2013-02-26 18:33:28
+                    [text] => Тестиииииииииинг!!!!
+                    [authorname] => 
+                    [responsiblemanname] => 
+                )
+
+        )
+
+)

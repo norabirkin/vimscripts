@@ -1,0 +1,71 @@
+/*****************************************************************************************
+* Tabs
+*****************************************************************************************/
+.yiiTab div.view {
+    border: none;
+    margin: 0;
+    padding: 8px;
+}
+
+.yiiTab ul.tabs {
+    background: url("../i/ctv-tabs-bg1.png") repeat-x scroll 0 100% transparent;
+    left: -27px;
+    margin: 0 -27px 0 0;
+    padding: 0 0 4px 13px;
+    position: relative;
+    border: none;
+}
+
+.tabs:after {
+    /*clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;*/
+}
+
+.yiiTab ul.tabs li {
+    min-height: 20px;
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: middle;
+    zoom: 1;
+    *display: inline;
+    _height: 20px;
+}
+
+.yiiTab ul.tabs a, .yiiTab ul.tabs a.active {
+    background: none;
+    border: none;
+    display: block;
+    height: 34px;
+    line-height: 34px;
+    padding: 0;
+    font-weight: normal;
+}
+
+.yiiTab ul.tabs a, .yiiTab ul.tabs a:link, .yiiTab ul.tabs a:hover {
+    text-decoration: underline;
+    color: #0A83AB !important;
+    font-weight: normal;
+}
+
+.yiiTab ul.tabs a span, .yiiTab ul.tabs a.active span {
+    display: block;
+    height: 34px;
+    padding: 0 11px;
+}
+
+.yiiTab ul.tabs a:hover {
+    background: none;
+}
+
+.yiiTab ul.tabs a.active {
+    color: #676466 !important;
+    text-decoration: none;
+    background: url("../i/ctv-tabs-bg2.png") no-repeat scroll 0 0 transparent;
+}
+
+.yiiTab ul.tabs a.active span {
+    background: url("../i/ctv-tabs-bg3.png") no-repeat scroll 100% 0 transparent;
+}

@@ -1,0 +1,2 @@
+<script type="text/javascript" src="js/gen_connection_apps.js"></script>
+<table align="center" width="900" class="table_comm" style="background: none; border: none;"><tr><td><div id="genAppsPanel"></div></td></tr></table> 

@@ -1,0 +1,26 @@
+<?php return array(
+	'HomePage' => 'Home page',
+	'Title' => 'Home internet and televison',
+	'SubTitle' => 'Service connection and control your personal account',
+	'NewBill' => 'Unpaid bills',
+	'NewBill1' => 'unpaid bill',
+	'NewBill2' => 'unpaid bills',
+	'NewBill3' => 'unpaid bills',
+	'NewMessage' => 'Unreviewed applications',
+	'NewMessage1' => 'unreviewed application',
+	'NewMessage2' => 'unreviewed applications',
+	'NewMessage3' => 'unreviewed applications',
+	'Greeting' => 'You logged in as',
+	'Phone' => 'Phone number',
+	'InternetHelper' => 'Internet-guide',
+	'Support' => 'Support',
+	'KnowledgeBase' => 'Knowledge base',
+	'Copyright' => 'All rights reserved',
+	'Copyright1' => 'JSC &laquo;Mobilnyie TeleSystemy&raquo;',
+	'Credit' => 'Your debt on the loan is {arrears}',
+
+	"GridTitle" => "Table caption",
+	"col_test1" => "Some column",
+	"col_test2" => "Other column",
+	"col_test3" => "Something"
+); ?>

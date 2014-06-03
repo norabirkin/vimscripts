@@ -40,6 +40,24 @@ nnoremap ;ak /{[a-z]\+}<cr>
 nnoremap ;k{ vi{<esc>`<
 nnoremap ;br :call<SID>BorderRadius()<cr>
 nnoremap ;rd :call<SID>Gradient()<cr>
+nnoremap ;fl :call<SID>FormatLog()<cr>
+nnoremap ;fb :call<SID>FormatBracket()<cr>
+nnoremap ;fa :call<SID>FormatAdminLog()<cr>
+
+function! s:FormatAdminLog()
+    execute "normal!^mm/\\[[A-Z]\\+\\]\<cr>j2ddkJ'm3Jf vls.\<esc>lveuf]xi]\<esc>Bi[\<esc>i[info] \<esc>"
+endfunction
+
+function! s:FormatBracket()
+    execute "normal!/(\<cr>kJ"
+endfunction
+
+function! s:FormatLog()
+    let str = ['Array', 'stdClass Object']
+    for i in str
+        execute "normal!:%s/".i."[ ]*//g\<cr>"
+    endfor
+endfunction
 
 function! s:CreateFake1()
     execute "normal!ma/(\<cr>\"jyi('aVj^%doObj::get(array(\<cr>)),\<esc>ko\<esc>\"jp"
@@ -80,7 +98,7 @@ endfunction
 function! s:AddToOldAdminLocalization()
     call <SID>SaveRegister()
     let s:en = <SID>YankInQuotes()
-    call <SID>OpenFile('/home/anshakov/lb/20/admin/localizes/localize.xml')
+    call <SID>OpenFile('/home/anshakov/lb/11/lbcore/phpclient/admin/localizes/localize.xml')
     execute "normal!Gkko<tu tuid=\"".s:en."\" datatype=\"plaintext\">\<cr>\<tab><tuv xml:lang=\"en\">\<cr>\<tab><seg>".s:en."</seg>\<cr>\<bs>\<bs>\<bs>\<bs></tuv>\<cr><tuv xml:lang=\"ru\">\<cr>\<tab><seg></seg>\<cr>\<bs>\<bs>\<bs>\<bs></tuv>\<cr>\<bs>\<bs>\<bs>\<bs></tu>\<esc>kkf>"
     call <SID>RestoreRegister()
 endfunction
@@ -654,8 +672,8 @@ function! s:AddLine(text)
 endfunction
 
 function! s:OpenLocalizationFile(file)
-    "call <SID>OpenFile('/home/anshakov/lb/20/client2/protected/messages/ru/main.php')
-    call <SID>OpenFile(s:protected.'/messages/ru/'.a:file.'.php')
+    call <SID>OpenFile('/home/anshakov/lb/11/lbcore/phpclient/client2/protected/messages/ru/main.php')
+    "call <SID>OpenFile(s:protected.'/messages/ru/'.a:file.'.php')
     call <SID>GoToTop()
     call <SID>FindInBuffer('\<return array')
 endfunction

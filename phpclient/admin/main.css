@@ -1,0 +1,774 @@
+html, body {margin: 0; padding: 0;}
+html {height:100%;}
+
+body { min-height: 100%; height: auto !important; height: 100%; }
+body { font-size: 11px; font-family:  Verdana, Arial, Helvetica, sans-serif; color: #000000; background-color:#999990; background: url('images/body_back.jpg') }
+input, textarea, select, table, div, span { font-size: 11px; font-family: Verdana, Arial, Helvetica, sans-serif; }
+select { border: solid 1px #c0c0c0; background-color:#F8F8F8; padding: 1px; }
+button { border: 0; background: transparent; vertical-align: middle; cursor: pointer; }
+textarea { margin:2px; }
+
+a { font-size:11px;}
+a:link { color: #aa2929; text-decoration: underline; }
+a:visited { color: #000000; text-decoration: underline; }
+a:active { color: #aa2929; text-decoration: underline; }
+a:hover { color:#29aaa2; text-decoration: underline; }
+.selected { color:#aa2929; text-decoration: none; font-weight:bold; }
+
+
+/* Head block visual styles */
+.lbHead { position: relative;height: 50px; background: url('images/top.gif') repeat-x; margin: 0; }
+#lbHead_content { margin: 0 auto;position: relative;height:50px; width: 1024px; }
+#lbHead_banner {position: relative;float: left; }
+#lbHead_man { position: absolute;left: 650px; top: 8px;font-size:11px; }
+#lbHead_curs { position: absolute; left: 650px;top: 27px; font-size: 11px; }
+#lbHead_icon_user { position: absolute;left: 630px; top: 8px; }
+#lbHead_icon_currency { position: absolute; left: 630px;top: 27px; }
+#lbHead_name{position:absolute;left:790px;top:8px;font-size:11px; color:#333333;}
+#lbHead_current{ position:absolute; left:790px; top:27px; font-size:11px; color:#333333; cursor: default; }
+.table_header{ background: url('images/table_header.gif') repeat-x; height:25px;}
+/* End head Block description */
+
+/* Menu Block visual styles */
+#lbWhiteLine{ position:absolute;top:77px; height:1px; width:100%;  background: url('images/white_dot.gif') repeat-x; z-index:1000;}
+#lbMenu{ position: relative; border-width:0 0 0 0; margin-top:0px;}
+.lbBackMenu{ position: relative; height:28px; background: #eaeaea url(images/bg-menu.gif) repeat-x top left; border-bottom: solid 1px #d0d0d0; }
+.x-menubar { border-width:0 0 0 0 !important; margin-top: 1px; background: none !important; }
+.x-menufirst { background: url(images/icon_date.gif) no-repeat; padding-left: 30px; padding-right: 10px }
+/* End menu Block description */
+
+/* System Body Block */
+#lbBody { display: block; overflow:hidden; position: relative;background:#999990;padding-top: 20px; padding-bottom: 0px; background: url('images/body_back.jpg'); zoom:1;  }
+/* End System body Block description */
+
+/* Footer block visual style */
+
+#lbFoot { display: block; position: static; height: 80px !important; background: url('images/footer.gif') repeat-x bottom left; }
+#lbFooterText { position: relative; width: auto;margin: 0 20 auto; float: left; top: 80px;}
+#lbFootLego { float: right; }
+/* End System foot Block description */
+/* Javascript framework aditional classes */
+
+.ext-edit-message-btn {
+	height: 30px !important;	
+	padding-left: 25px !important;
+}
+
+.ext-doc-generation-error {
+	cursor: default !important; 
+}
+
+.enq-btn:hover { text-decoration: underline; }
+
+.ext-add-many { background-image:url(images/addMany.png) !important; }
+.ext-add-manual { background-image:url(images/addManual.png) !important; }
+
+.ext-add { background-image:url(images/ext-add.gif) !important; }
+.ext-attach { background-image:url(images/attach.gif) !important; }
+.ext-accept { background-image:url(images/accept.gif) !important; }
+.ext-remove { background-image:url(images/ext-delete.gif) !important; }
+.ext-refresh { background-image:url(resources/extjs-3/resources/images/gray-extend/grid/refresh.gif) !important; }
+.ext-save-dis { background-image:url(images/icon_save_grey.png) !important; cursor: default !important;}
+.ext-save { background-image:url(images/icon_save.png) !important; }
+.ext-history { background-image:url(images/icon_history.png) !important; }
+.ext-history2 { background-image:url(images/icon_history2.png) !important; }
+.ext-stat { background-image:url(images/icon_stat.png) !important; }
+.ext-edit { background-position: 2px; background-image:url(images/edit16.gif) !important; }
+.ext-edit-dis { background-position: 2px; background-image:url(images/edit16-dis.gif) !important; }
+.ext-fields { background-position: 2px; background-image:url(images/newfield.gif) !important; }
+.ext-list { background-position: 2px; background-image:url(images/list.png) !important; }
+
+.ext-pedit { background-position: 2px; background-image:url(images1/edit_15.gif) !important; }
+.ext-pedit-gray { background-position: 2px; background-image:url(images1/edit_15_grey.gif) !important; }
+
+.ext-tpl-user-add { background-position: 2px; background-image:url(images/user-plus.gif) !important; background-repeat: no-repeat; }
+.ext-cancel { background-image:url(images/cancel.gif) !important; }
+.ext-cancel-dis { background-image:url(images/cancel-grey.gif) !important; cursor: default !important; }
+.ext-drop { background-image:url(images/delete.gif) !important; }
+.ext-drop-dis { background-image:url(images/delete_grey.gif) !important; cursor: default !important; }
+.ext-ugroup { background-image:url(images/contact_group.gif) !important; }
+.ext-ugroup-dis { background-image:url(images/contact_group_gray.gif) !important; }
+.ext-leased { background-image:url(images/leased.gif) !important; background-repeat: no-repeat; }
+.ext-radius { background-image:url(images/radius.gif) !important; background-repeat: no-repeat; }
+.ext-cdrpabx { background-image:url(images/telephone.gif) !important; background-repeat: no-repeat; }
+.ext-voip { background-image:url(images/ipphone.gif) !important; background-repeat: no-repeat; }
+.ext-usbox { background-image:url(images/usbox.gif) !important; background-repeat: no-repeat; }
+.ext-info, .ext-doc-generation-error { background-image:url(images/icon_helpdesk.gif) !important; background-repeat: no-repeat; }
+.ext-info-dis { background-image:url(images/icon_helpdesk_grey.gif) !important; background-repeat: no-repeat; }
+.ext-calc { background-image:url(images/icon_objects.gif) !important; }
+.ext-activate { background-image:url(images/userok.gif) !important; background-repeat: no-repeat; }
+.ext-blocked-grid { background-image:url(images/userred.png) !important; background-repeat: no-repeat; }
+.ext-blocked-grid div { font-weight: bold; font-size: 8px; margin-left: 10px; height: 9px; width: 10px; padding: 0px; text-align: center; }
+.ext-disactivate { background-image:url(images/userno.gif) !important; }
+.ext-nopermit { background-image:url(images/nopermit.gif) !important; }
+.ext-close { background-image:url(images/stop.gif) !important; }
+.ext-close-dis { background-image:url(images/stop_grey.gif) !important; }
+.ext-calc { background-image:url(images1/calc.gif) !important; }
+.ext-server { background-image:url(images/server.gif) !important; }
+.ext-filter { background-image:url(images/filter.gif) !important; }
+.ext-book { background-image:url(images/book.gif) !important; }
+.ext-mainleaf { background-image:url(images/mainleaf.gif) !important; }
+.ext-payhistory { background-image:url(images/icon_currency.gif) !important; }
+.ext-pay-dis { background-image:url(images/currency_grey.gif) !important; }
+.ext-upcsv { background-image:url(images/csvup.gif) !important; }
+.ext-downcsv { background-image:url(images/csvdown.gif) !important; }
+.ext-schedule { background-image:url(images/clock.gif) !important; }
+.ext-schedule-dis { background-image:url(images/clock-dis.gif) !important; }
+.ext-scheduled { background-image:url(images/sheduled_task.png) !important; }
+.ext-devices { background-image:url(images/devices.png) !important; }
+.ext-upload { background: url(images/upload.gif) no-repeat 0 0 !important; }
+.ext-search { background: url(images/search.gif) no-repeat 0 0 !important; }
+.ext-arrow-right { background: url(images/arrows.gif) no-repeat 0 0 !important; }
+.ext-arrow-left { background: url(images/arrows.gif) no-repeat 0 -16px !important; }
+.ext-calendar { background-image:url(images/cal.gif) !important; }
+.ext-table { background-image:url(images/table.gif) !important; }
+.ext-table-dis { background-image:url(images/table_grey.gif) !important; }
+.ext-levelup { background-image:url(images/levelup.gif) !important; }
+.ext-stop { background-image:url(images/stop.gif) !important; }
+.ext-privileges { background-image:url(images/privileges.gif) !important; }
+.ext-mailto { background-image:url(images/mailto.gif) !important; }
+.ext-scanbarcode { background-image:url(images/scanbarcode.png) !important; }
+.ext-tariff { background-image:url(images/tariff.png) !important; }
+.ext-charts { background-image:url(images/chart.gif) !important; }
+.ext-charts-dis { background-image:url(images/chart-grey.gif) !important; }
+.ext-turn { background-image:url(images/endturn.png) !important; }
+.ext-turn-dis { background-image:url(images/endturn-grey.png) !important; }
+.ext-plus { background-image:url(images/plus.gif) !important; }
+.ext-minus { background-image:url(images/minus.gif) !important; }
+.ext-erase { background-image:url(images/erase.png) !important; }
+.ext-key { background-image:url(images/key.png) !important; }
+.ext-account { background-image:url(images/account.png) !important; }
+.ext-agreement { background-image:url(images/agreement.png) !important; }
+.ext-address-ico { background-image:url(images/address-book.png) !important; }
+.ext-smartcard { background-image:url(images/smartcard.png) !important; }
+.ext-smartcard-green { background-image:url(images/smartcard-green.png) !important; }
+.ext-smartcard-yellow { background-image:url(images/smartcard-yellow.png) !important; }
+.ext-hand { background-image:url(images/hand.png) !important; }
+.ext-devmap { background-image:url(images/devmap.png) !important; }
+.ext-blocked { background-image:url(images/locked.gif) !important; }
+.ext-subgrid { float: left; margin: 2px; }
+.ext-rules { background-position: 2px; background-image:url(images/rules.png) !important; }
+.ext-tarif-copy { background-position: 2px; background-image:url(images/editcopy16.gif) !important; }
+.x-no-background { background: none !important; }
+.x-dd-drag-ghost .x-tree-node-indent,.x-dd-drag-ghost .x-tree-ec-icon { display: inline !important; }
+.ext-pd-left { width: 197px; height: 222px; }
+.ext-pd-right { width: 197px; height: 222px; }
+.ext-grid3-row-action-cell .x-grid3-cell-inner { padding: 1px 0 0 0; }
+.ext-grid3-row-action-cell .x-grid3-cell-inner div { background-repeat:no-repeat; width:18px; height:16px; cursor:pointer; }
+.x-form-file-wrap { position: relative; height: 22px; }
+.x-form-file-wrap .x-form-file { position: absolute; right: 0; -moz-opacity: 0; filter:alpha(opacity: 0); opacity: 0; z-index: 2; height: 22px; }
+.x-form-file-wrap .x-form-file-btn { position: absolute; right: 0; z-index: 1; }
+.x-form-file-wrap .x-form-file-text { position: absolute; left: 0; z-index: 3; color: #777; }
+.ext-address { padding-top: 5px; }
+.ext-address-data { padding-top: 5px; width: 206px; }
+.ext-radiogroup .x-panel-body { background-color: transparent !important; }
+.x-grid-group-hd-control { margin: 0px; clear: both; }
+.x-grid-group-title-control { float: left; width: 89%; }
+.x-checkbox { width:100%; height:16px; background-position:center center; background-repeat:no-repeat; background-color:transparent; }
+.ext-edit-users-grid { width: 16px; height: 16px; float: right; cursor: pointer; }
+.ext-row-red{ background-color: #fff3f3; }
+
+/* This line overrides ext style of the table header */
+.x-grid3-header {
+    background-color: #F4F4F4 !important;
+}
+
+/* Unknown id style!! */
+#fi-button-msg { background:#EEEEEE none repeat scroll 0% 0%; border:2px solid #CCCCCC; float:left; margin:5px; padding:5px 10px; }
+
+/**
+ * Common visualization style for the interface tables
+ *
+ */
+table.table_comm {
+    border: solid 1px #c0c0c0;
+    background-color: white;
+    border-right: none;
+    border-bottom: none;
+    empty-cells: show;
+    padding: 0px;
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+.cell-vertical-top {
+    vertical-align: top !important;
+}
+
+.table_comm fieldset {
+    padding: 8px;
+    padding-top: 4px;
+    margin: 2px;
+}
+
+.table_comm legend { font-weight: bold; margin-bottom: 4px; }
+
+.table_comm .th_comm, .table_comm .td_head, .table_comm .td_comm, .table_comm .td_padding_l7, .table_comm .td_bold {
+    border: solid 1px #c0c0c0;
+    border-left: none;
+    border-top: none;
+    height: 22px;
+    padding:2px;
+}
+
+.table_comm .th_comm { background-color: #e0e0e0; font-weight: bold; }
+.table_comm .td_head { background-color: #e0e0e0; font-weight: bold; text-align: center; }
+.table_comm .td_head_gray { background-color: #e0e0e0; font-weight: bold; text-align: center; color:#333333;border-bottom: solid 1px #c0c0c0;border-right: solid 1px #c0c0c0;  }
+.table_comm .td_head_ext { background: url('images/table_header.gif') repeat-x; height:26px; border-bottom: solid 1px #c0c0c0; border-right: solid 1px #c0c0c0; font-weight: bold; text-align: center; }
+.table_comm .td_bott { border-bottom: solid 1px #c0c0c0; }
+.table_comm .table_comm_nodecor { border: none; background-color: transparent; }
+.table_comm .td_noborder { border: none; }
+.table_comm .td_noborder .td_nodecor { background-color: transparent; }
+.table_comm .td_padding_l7 { padding-left: 7px; }
+.table_comm .td_bold { font-weight: bold; }
+
+/*---- Smirnov ---*/
+.select_comm{ font-size:11px; height:20px; }
+.input_comm{ font-size:11px; height:20px; padding-left:2px; }
+.empty_back{ background-color:#999990; background: url('images/body_back.jpg');}
+.z11 { font-size:11px; }
+.z11_gray { font-size:11px; color:#333333; }
+.time_table{width:100px; color: #333333;}
+/*-------------------- */
+
+/* End tables style descriptions */
+
+
+
+
+/* BEGIN list properties in managers */
+.ul_man_main, .ul_man_in {
+    list-style-type: none;
+    list-style-position: outside;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    padding-left: 20px;
+    margin: 0px;
+}
+
+.ul_man_main input, .ul_man_in input {
+    margin-left: -19px;
+}
+/* END list properties in managers */
+
+/*  BEGIN Access Deny message */
+.accessDeny {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    text-align: center;
+    margin-top: 40px;
+    border-top: 2px solid #ec1c1c;
+    border-left: 2px solid #ec1c1c;
+    border-bottom: 2px solid #5f0000;
+    border-right: 2px solid #5f0000;
+    width: 500px;
+}
+
+.accessDeny a:hover, .accessDeny a:link, .accessDeny a:visited, .accessDeny a:active {
+    font-size: 14px;
+    font-weight: bold;
+    color: #5f0000;
+}
+/*  END Access Deny message */
+
+table.MMenu {
+    border: none;
+    font-family: Verdana;
+    font-size: 11px;
+    background-color:#F1F1EB;
+}
+
+.MMenu td {
+    padding: 0px;
+    margin: 0px;
+    height: 20px;
+}
+
+td.MLCunSelected {
+    width: 3px;
+    background: url(images/menu_left_coner_1.gif) top left no-repeat ;
+}
+
+td.MCunSelected {
+    padding-left: 4px;
+    padding-right: 4px;
+    background: url(images/menu_1.gif) top left repeat-x ;
+    text-align: center;
+    text-decoration: underline;
+    color: #cc0000;
+    cursor: pointer;
+}
+
+td.MRCunSelected {
+    width: 3px;
+    background: url(images/menu_right_coner_1.gif) top left no-repeat ;
+}
+
+td.MLCSelected {
+    width: 3px;
+    background: url(images/menu_left_coner_0.gif) top left no-repeat ;
+}
+
+td.MCSelected {
+    padding-left: 4px;
+    padding-right: 4px;
+    background: url(images/menu_0.gif) top left repeat-x ;
+    text-align: center;
+    text-decoration: none;
+    cursor: default;
+}
+
+td.MRCSelected {
+    width: 3px;
+    background: url(images/menu_right_coner_0.gif) top left no-repeat ;
+}
+
+td.MMBreak {
+    width: 1px;
+}
+
+.sbssTextArea {
+    border: solid 1px black;
+    width: 580px;
+    height: 260px;
+}
+
+/*  OLD CSS */
+
+.lb_txt, .ln_txt, .cb_txt, .cn_txt, .rn_txt, .rb_txt {font-size: 8pt;
+    font-family: "Verdana", Helvetica, Arial, sans-serif; }
+
+.lb_txt, .cb_txt, .rb_txt {   line-height : 17px; }
+
+.lb_txt { padding-left : 5px; text-align : left;   font-weight : bold; }
+.ln_txt { padding-left : 5px; text-align : left;  }
+.cb_txt { text-align : center;   font-weight : bold; }
+.cn_txt { text-align : center;  }
+.rn_txt { text-align : right; padding-right : 5px; }
+.rb_txt { text-align : right; padding-right : 5px; font-weight : bold; }
+
+.l_head { font-family: "Verdana", Helvetica, Arial, sans-serif; font-size: 12pt; font-weight : bold;
+   padding-left : 5px; line-height : 30px; }
+
+.c_head { font-family: "Times New Roman", Times, serif; font-size: 16pt; font-weight : bold;
+   text-align : center; letter-spacing : 2px; }
+
+.sm_txt { padding-right : 5px; text-align : right; font-family: Arial, Helvetica, sans-serif;
+      font-size: 7pt; }
+
+.it_txt { padding-left : 5px; padding-right : 5px; text-align : justify;
+   font-family: "Times New Roman", Times, serif; font-size: 10pt;
+   font-style : italic; line-height : 17px; }
+
+font { font-family: tahoma, arial; }
+font.v { font-family: verdana, arial; }
+a:hover { text-decoration: underline; color: #cc0000 }
+.z10 { font-size: 10px }
+.z11 { font-size: 11px }
+.z12 { font-size: 11px; font-family: verdana; }
+.zzz { font-size: 11px; font-family: verdana; }
+.n { color: black; text-decoration: none }
+.ne { color: #444240; text-decoration: none }
+.m { color: white; text-decoration: none }
+.m:hover { color: white; text-decoration: none }
+.inp { font-size:11px; border-style:none; font-family: tahoma, arial; text-align: center; width:100% }
+.inpo { font-size:11px; border-style:none; font-family: tahoma, arial; }
+.frm {background-color: #DDDDDD;}
+td.norm {
+        padding:5px;
+        border:1px solid #c1c1c1;
+        border-left:none;
+        border-top:none;
+        background-color:#f6f6f6;
+        cursor: pointer;
+}
+
+td.selected {
+        padding:5px;
+        border-right:1px solid #c1c1c1;
+        background-color:#ffffff;
+}
+
+.rep_filter {
+              cursor: pointer;
+}
+
+span.rep_filter:hover { text-decoration: none; color: #EC3C00; }
+
+.tarif_table_grid_1 {
+        border-bottom: solid 1px #c0c0c0;
+        border-left: solid 1px #c0c0c0;
+        font-size: 11px;
+}
+
+.tarif_table_grid_2 {
+        border-bottom: solid 1px #c0c0c0;
+        font-size: 11px;
+}
+
+TD.menu1 {
+    width: 135px;
+    float: left;
+    background-color: #E1E1E1;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+    height: 20px;
+    font-family: "Verdana", Helvetica, Arial, sans-serif;
+    font-size: 8pt;
+    border-right: solid 1px #FFFFFF;
+    z-index: 2100;
+}
+
+TD.sub_menu {
+        width: 160px;
+        display: block;
+        text-align: left;
+        cursor: pointer;
+        background-color: #575757;
+        border-top: solid 1px #FFFFFF;
+        border-bottom: solid 1px #FFFFFF;
+        color: #FFFFFF;
+        height: 20px;
+        font-family: "Verdana", Helvetica, Arial, sans-serif;
+        font-size: 8pt;
+        z-index: 1900;
+}
+
+a.sel_m {
+    display: block;
+    border: solid 1px #c0c0c0;
+    background-color: #FFFFFF;
+    font-size: 11px;
+}
+
+a.sel_m:hover { background-color: #e0e0e0;}
+
+/**
+ * Some fixes for MS IE browsers
+ *
+ */
+.x-table-form-layout-ct .x-table-layout-cell .x-form-field { /* fix for form elements with no border clipping */
+    margin-top: 0;
+}
+
+.ext-ie .x-table-form-layout-ct .x-table-layout-cell .x-form-trigger { /* ie fix for trigger field positioning */
+    margin-top: 2px;
+}
+
+.ext-ie7 .x-form-text {
+    margin: -1px 0px 0px;
+}
+.ux-maximgb-tg-panel .x-grid3-scroller
+{
+    /*overflow: scroll !important;*/
+}
+
+div.ux-maximgb-tg-mastercell-wrap
+{
+    border: 0px none !important;
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+.ux-maximgb-tg-uiwrap
+{
+    float: left;
+    position: relative;
+    height: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.ux-maximgb-tg-elbow-empty
+{
+    position: absolute;
+    height: 18px;
+    width: 16px;
+    overflow: hidden;
+}
+
+.ux-maximgb-tg-elbow-line
+{
+    position: absolute;
+    height: 18px;
+    width: 16px;
+    overflow: hidden;
+    background: url(images/elbow-line.gif) repeat-x;
+}
+
+.ux-maximgb-tg-elbow
+{
+    position: absolute;
+    height: 18px;
+    width: 16px;
+    overflow: hidden;
+    background: url(images/elbow.gif) no-repeat;
+}
+
+.ux-maximgb-tg-elbow-end
+{
+    position: absolute;
+    height: 18px;
+    width: 16px;
+    overflow: hidden;
+    background: url(images/elbow-end.gif) no-repeat;
+}
+
+.ux-maximgb-tg-elbow-active
+{
+    cursor: pointer;
+}
+
+.ux-maximgb-tg-elbow-minus
+{
+    position: absolute;
+    height: 18px;
+    width: 16px;
+    overflow: hidden;
+    background: url(images/elbow-minus.gif) no-repeat;
+}
+
+.ux-maximgb-tg-elbow-end-minus
+{
+    position: absolute;
+    height: 18px;
+    width: 16px;
+    overflow: hidden;
+    background: url(images/elbow-end-minus.gif) no-repeat;
+}
+
+.ux-maximgb-tg-nl-minus
+{
+    position: absolute;
+    height: 18px;
+    width: 16px;
+    overflow: hidden;
+    background: url(images/elbow-minus-nl.gif) no-repeat;
+}
+
+.ux-maximgb-tg-elbow-plus
+{
+    position: absolute;
+    height: 18px;
+    width: 16px;
+    overflow: hidden;
+    background: url(images/elbow-plus.gif) no-repeat;
+}
+
+.ux-maximgb-tg-elbow-end-plus
+{
+    position: absolute;
+    height: 18px;
+    width: 16px;
+    overflow: hidden;
+    background: url(images/elbow-end-plus.gif) no-repeat;
+}
+
+.ux-maximgb-tg-nl-plus
+{
+    position: absolute;
+    height: 18px;
+    width: 16px;
+    overflow: hidden;
+    background: url(images/elbow-plus-nl.gif) no-repeat;
+}
+
+ul.line {
+    display: block;
+    position: relative;
+    padding: 0px;
+}
+
+.line li {
+    display: inline;
+    float: left;
+    margin-left: 0px;
+    padding: 0px;
+}
+
+.progress-wrap {
+    /*position: relative;*/
+    border: solid 1px #c0c0c0;
+    background-color: #ffffff;
+}
+
+.progress-wrap, .progress-value {
+    width: 120px; height: 10px;
+}
+
+.x-form-field-wrap .x-form-edit-trigger{
+    background-image: url(images/edit-trigger.gif) !important;
+}
+
+.x-combo-item-locked {
+    background-repeat: no-repeat;
+    background-image: url(images/locked.gif) !important;
+}
+
+.app-calendar-cell, .app-calendar-cell-work {
+    height: 85px;
+    width: 130px;
+    background-color: white;
+    padding: 2px;
+    border: solid 1px #e0e0e0;
+    cursor:default;
+}
+
+.app-calendar-cell-restr {
+    font-size: 10px;
+    font-style: italic;
+}
+
+.app-calendar-cell-work {
+    background-color: #FFFBED;
+}
+
+
+/*------------- Options->Payments -------------*/
+/*------- Styles for history and legend -------*/
+.x-type-payment-edited {
+    background-color: #DBE6F2!important;
+}
+.x-type-payment-corrected {
+    background-color: #FACA82!important;
+}
+.x-type-payment-canceled {
+    background-color: #FCA4A4!important;
+}
+.x-type-payment-transfer {
+    background-color: #B5FFBE!important;
+}
+.x-type-payment-part-transfer {
+    background-color: #9494FF!important;
+}
+
+.x-type-payment-bso {
+    background-color: #E496FF!important;
+}
+
+
+
+/**
+ * class to allow mouse selection in the ext grid row
+ */
+.x-selectable, .x-selectable * {
+    -moz-user-select: text !important;
+    -khtml-user-select: text !important;
+}
+
+.info {
+    color: #5E5E5E;
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+}
+.warning {
+    color: #A30000;
+}
+
+
+/*------------ Objacts->Postmans -----------------*/
+/*------ colors for different kinds of rows ------*/
+.x-type-postman-street {
+    background-color: #FFF5BC!important;
+}
+.x-type-postman-building {
+    background-color: #C9FFBC!important;
+}
+/*------------------------------------*/
+
+
+/*.x-grid-editedrow {
+    font-family: 'Brush Script MT';
+    font-weight: bold;
+    background-color: red;
+}
+*/
+
+/**
+ * Agreements grid. To point if agreement's owner is deptor
+ */
+.x-type-deptor-disconnect {
+    background-color: #FACA82 !important;
+}
+
+.x-type-deptor-terminate {
+    background-color: #ec1c1c !important;
+}
+
+.ext-print { background-image:url(images/print_16.png) !important; }
+.ext-ms-word { background-image:url(images/ms_word.png) !important; }
+.ext-ms-excel { background-image:url(images/ms_excel.png) !important; }
+.ext-text { background-image:url(images/text.png) !important; }
+.ext-save-doc { background-image:url(images/page_save.png) !important; }
+
+
+/**
+ * Icons for menu bar in agents
+ */
+a.menuImgLink, span.menuImgLink {
+    color: #222;
+    font-weight: bold;
+    background-repeat: no-repeat;
+    background-position: 0 50%;
+    padding: 3px 0 3px 26px;
+    margin: .4em 0;
+}
+a.rnas {
+    margin-left: 20px;
+    background-image: url(images/rnas.png);
+}
+a.netw {
+    margin-left: 20px;
+    background-image: url(images/network-transmit.png);
+}
+span.save {
+    margin-left: 5px;
+    background-image: url(images1/create1.gif);
+}
+
+/**
+ * Hide text field body
+ */
+.textfield-body-hide {
+    border: none !important;
+    background: none !important;
+    cursor: default;
+}
+
+/**
+ * Fix class for empty button
+ */
+.gridBtnEmpty {
+    border: none !important;
+    background: none !important;
+    cursor: default !important;
+}
+
+/**
+ * Load icon to use in the headers
+ */
+.x-header-load-icon {
+    background: url(images/load-small.gif);
+    background-repeat: no-repeat;
+}
+
+/**
+ * Multitarif line
+ */
+.x-type-multitarif {
+    background-color: #F0FFFA !important;
+}
+
+/**
+ * 	RM #7664 - Combo display trigger fault. Override class
+ */
+.ext-strict .ext-ie8 .x-toolbar-cell .x-form-field-trigger-wrap .x-form-trigger {
+    right: auto !important; /* IE8 fix for ext-all.css */
+}
+
+.normal-wrap-cell div {
+    white-space: normal !important;
+    text-align: center;
+}
