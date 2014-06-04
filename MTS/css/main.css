@@ -1,0 +1,138 @@
+body {
+    padding-top: 0;
+}
+h1, h4 {
+    color: #000;
+}
+h1 {
+    font-size: 26px;
+}
+h4 {
+    background: url("../i/h2-border.gif") no-repeat scroll 100% 100% transparent;
+    font-size: 13px;
+    margin-bottom: 10px;
+    padding: 0 0 5px;
+    text-transform: uppercase;
+}
+.header-tagline {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 16px 0 4px !important;
+}
+.header-tagline2 {
+    margin: 0;
+}
+.header-taglines {
+    float: left;
+    margin-left: 30px;
+}
+.sidebar-logo {
+    margin-left: 10px;
+    margin-bottom: 40px;
+    line-height: 34px;
+    font-size: 11px;
+    float: left;
+}
+.no-underline {
+    text-decoration: none;
+}
+.alert {
+    margin-top: 0;
+}
+.breadcrumbs {
+    margin-bottom: 6px;
+    font-size: 11px;
+}
+.sidebar-nav-title {
+    color: #fff;
+    height: 50px;
+    background: #ba1414 url('./../i/bg-sidebar-nav.png');
+}
+.sidebar-nav-menu {
+    border: 1px solid #ff8080;
+    border-top: 0;
+}
+.button_inner_wrp {
+    background-image: url("../i/btn_right.gif") !important;
+}
+.button_inner {
+    background-image: url("../i/btn_left.gif") !important;
+}
+.page-title, .step_title {
+    margin-top: 0;
+}
+.input-submit, input[type="submit"] {
+    width: 87px;
+    padding: 0;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 12px;
+    height: 21px;
+    cursor: pointer;
+    text-align: center;
+    background: #e3010d url('./../i/button-static.png') center center no-repeat;
+}
+.loginblock h1 {
+    margin: 0;
+}
+.loginblock p {
+    padding: 0 0 12px 0;
+    margin: 5px 0 0;
+}
+.logincontentblock {
+    margin-left: 25px;
+}
+
+.ui-widget-header {
+    background:#ba1414;
+    background: -moz-linear-gradient(
+        top,
+        rgba(230,144,144,1) 0%,
+        rgba(196,26,27,1) 15px,
+        rgba(186,20,20,1) 4px,
+        rgba(186,20,20,1) 100%
+    ); /* FF3.6+ */
+
+    background: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0%,rgba(230,144,144,1)),
+        color-stop(15ox,rgba(196,26,27,1)),
+        color-stop(4px,rgba(186,20,20,1)),
+        color-stop(100%,rgba(186,20,20,1))
+    ); /* Chrome,Safari4+ */
+
+    background: -webkit-linear-gradient(
+        top,
+        rgba(230,144,144,1) 0%,
+        rgba(196,26,27,1) 15px,
+        rgba(186,20,20,1) 4px,
+        rgba(186,20,20,1) 100%
+    ); /* Chrome10+,Safari5.1+ */
+
+    background: -o-linear-gradient(
+        top,
+        rgba(230,144,144,1) 0%,
+        rgba(196,26,27,1) 15px,
+        rgba(186,20,20,1) 4px,
+        rgba(186,20,20,1) 100%
+    ); /* Opera 11.10+ */
+
+    background: -ms-linear-gradient(
+        top,
+        rgba(230,144,144,1) 0%,
+        gba(196,26,27,1) 15px,
+        gba(186,20,20,1) 4px,
+        gba(186,20,20,1) 100%
+    ); /* IE10+ */
+
+    background: linear-gradient(
+        top,
+        rgba(230,144,144,1) 0%,
+        rgba(196,26,27,1) 15px,
+        rgba(186,20,20,1) 4px,
+        rgba(186,20,20,1) 100%
+    ); /* W3C */
+}
