@@ -1,3 +1,4 @@
+match ErrorMsg '\%>80v.\+'
 nnoremap ;rr :call <SID>RenameRecursive()<cr>
 nnoremap ;oo :call <SID>OpenExtJSClass('')<cr>
 nnoremap ;ov :call <SID>OpenExtJSClass('OSS.view.')<cr>
@@ -32,8 +33,8 @@ nnoremap ;sp :call<SID>FromSystemGetFunctorsForBackEnd()<cr>
 nnoremap ;ii :call<SID>ReplaceWithNewLocalization()<cr>
 nnoremap ;sc :call<SID>SetController()<cr>
 nnoremap ;ir :call<SID>ItemRegister()<cr>
-nnoremap ;aa :call<SID>CreateFake()<cr>
-nnoremap ;aj :call<SID>CreateFake1()<cr>
+nnoremap ;aa :call<SID>FindImages()<cr>
+nnoremap ;aj :call<SID>FindEmptyStringLast()<cr>
 nnoremap ;ax ^r'f]r'
 nnoremap ;an ^Js\n<esc>^
 nnoremap ;ak /{[a-z]\+}<cr>
@@ -43,6 +44,20 @@ nnoremap ;rd :call<SID>Gradient()<cr>
 nnoremap ;fl :call<SID>FormatLog()<cr>
 nnoremap ;fb :call<SID>FormatBracket()<cr>
 nnoremap ;fa :call<SID>FormatAdminLog()<cr>
+nnoremap ;cs i/*<![CDATA[*/<esc>
+nnoremap ;ce i/*]]>*/<esc>
+
+function! s:FindImages()
+    <SID>Grep('url\(.*\)', '~/lb/11/lbcore/phpclient/client2/protected/scss/', 'R')
+endfunction
+
+function! s:FindEmptyString()
+    execute 'grep! --exclude=*.{swp,log} --exclude=*.log.* --exclude-dir=\"\\.svn\" --exclude-dir=docs -PR "^[ \t]*$\n<\?" .'
+endfunction
+
+function! s:FindEmptyStringLast()
+    execute 'grep! --exclude=*.{swp,log} --exclude=*.log.* --exclude-dir=\"\\.svn\" --exclude-dir=docs -PR "^\?>\n^[ \t]*$" .'
+endfunction
 
 function! s:FormatAdminLog()
     execute "normal!^mm/\\[[A-Z]\\+\\]\<cr>j2ddkJ'm3Jf vls.\<esc>lveuf]xi]\<esc>Bi[\<esc>i[info] \<esc>"
@@ -198,13 +213,13 @@ function! s:Fields()
     execute "normal!2jf>/account\<cr>f>l\"jyej^f>w\"kyi'?array\<cr>Vf(%s\<c-r>j '\<c-r>k'\<esc>j^"
 endfunction
 
-function! s:ReplaceUsWithUx()
-    let result = <SID>Grep('OSS.us.HeadMsg', '.', 'R')
+function! s:ReplaceSmth(find, replace, folder)
+    let result = <SID>Grep(find, folder, 'R')
     let bufnr = -1
     for i in result
         if bufnr != i.bufnr
             call <SID>OpenGrepResultItem(i)
-            execute "normal!:%s/OSS.us.HeadMsg/OSS.ux.HeadMsg/g\<cr>:w"
+            execute "normal!:%s/".find."/".replace."/g\<cr>:w"
             let bufnr = i.bufnr
         endif
     endfor
