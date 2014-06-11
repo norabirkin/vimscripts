@@ -1,0 +1,16 @@
+body {
+    padding-top: 0;
+}
+h1, h4 {
+    color: #000;
+}
+h1 {
+    font-size: 26px;
+}
+h4 {
+    background: url("../i/h2-border.gif") no-repeat scroll 100% 100% transparent;
+    font-size: 13px;
+    margin-bottom: $padding / 2;
+    padding: 0 0 5px;
+    text-transform: uppercase;
+}
