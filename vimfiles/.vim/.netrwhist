@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/home/anshakov/lb/11/lbcore/phpclient/client2/protected/config'
+let g:netrw_dirhist_2='/home/anshakov/lb/20/client2/protected/components'
+let g:netrw_dirhist_3='/home/anshakov/lb/8/admin/b'
+let g:netrw_dirhist_4='/home/anshakov/lb/20/admin'
+let g:netrw_dirhist_5='/home/anshakov/workspace/lbview'

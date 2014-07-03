@@ -50,15 +50,6 @@ nnoremap ;cs i/*<![CDATA[*/<esc>
 nnoremap ;ce i/*]]>*/<esc>
 nnoremap ;lc :r!cp ~/lb/7/admin/soap.class.php .<cr>:e config.php<cr>ggoinclude_once('NBLogger.php');<esc>:w<cr>
 nnoremap ;ca :call<SID>CreateAccessor()<cr>
-nnoremap ;ls :call<SID>LoadSoap()<cr>
-"nnoremap ;od :w<cr>:e ~/lb/admin2/admin-2_0-oss/protected/runtime/details.log<cr>
-nnoremap ;od :e ~/lb/11/lbcore/phpclient/client2/protected/runtime/dev.log<cr>
-nnoremap ;oi :w<cr>:e ~/lb/admin2/admin-2_0-oss/protected/runtime/info.log<cr>
-nnoremap ;oc :e ~/lb/11/lbcore/phpclient/client2/protected/config/lanbilling.config.php<cr>
-
-function! s:LoadSoap()
-    execute "normal!:r!cp ~/lb/11/lbcore/xmlapi/api3.wsdl soap\<cr>:e soap/api3.wsdl\<cr>G?127\<cr>ct:192.168.30.2"
-endfunction
 
 function! s:CreateAccessor()
     execute "normal!^f$l\"jye"
