@@ -9,6 +9,7 @@ nnoremap ;ob :call <SID>OpenBackAndController()<cr>
 nnoremap ;rc :call <SID>RenameClass()<cr>
 nnoremap ;tc :call<SID>LocalizeConfirm()<cr>
 nnoremap ;tu :call<SID>LocalizeRus('messages')<cr>
+"nnoremap ;tt :call<SID>Localize('main')<cr>
 nnoremap ;tt :call<SID>Localize('messages')<cr>
 nnoremap ;te :call<SID>Localize('errors')<cr>
 nnoremap ;tf :call<SID>FindLocalization()<cr>
@@ -20,7 +21,6 @@ nnoremap ;ta :call<SID>FindInOldAdminLocalization()<cr>
 nnoremap ;td :call<SID>AddToOldAdminLocalization()<cr>
 nnoremap ;tn :call<SID>ConfirmOldLocalization()<cr>
 nnoremap ;tw :call<SID>WrapWithT()<cr>
-nnoremap ;ou :w<cr>:e ~/lb/admin2/admin-2_0-oss/protected/runtime/vardump.log<cr>
 nnoremap ;rt :call<SID>GrepTabs()<cr>
 nnoremap ;fg :call<SID>FindRefGetter()<cr>
 nnoremap ;fr :call<SID>FindRussian()<cr>
@@ -34,8 +34,8 @@ nnoremap ;sp :call<SID>FromSystemGetFunctorsForBackEnd()<cr>
 nnoremap ;ii :call<SID>ReplaceWithNewLocalization()<cr>
 nnoremap ;sc :call<SID>SetController()<cr>
 nnoremap ;ir :call<SID>ItemRegister()<cr>
-nnoremap ;aa :call<SID>Rplc()<cr>
-nnoremap ;aj ^"jdg_a<?php <c-r>j ?><esc>
+nnoremap ;ra :call<SID>Rplc()<cr>
+nnoremap ;aj :e ~/sbssfiles/<cr> 
 nnoremap ;af /Operators<cr>f]vF[F$s$lbops<esc>
 nnoremap ;ax :call<SID>MergeModify()<cr>
 nnoremap ;an $a <esc>g_ld$^Js\n<esc>^
@@ -51,10 +51,108 @@ nnoremap ;ce i/*]]>*/<esc>
 nnoremap ;lc :r!cp ~/lb/7/admin/soap.class.php .<cr>:e config.php<cr>ggoinclude_once('NBLogger.php');<esc>:w<cr>
 nnoremap ;ca :call<SID>CreateAccessor()<cr>
 nnoremap ;ls :call<SID>LoadSoap()<cr>
-"nnoremap ;od :w<cr>:e ~/lb/admin2/admin-2_0-oss/protected/runtime/details.log<cr>
-nnoremap ;od :e ~/lb/11/lbcore/phpclient/client2/protected/runtime/dev.log<cr>
-nnoremap ;oi :w<cr>:e ~/lb/admin2/admin-2_0-oss/protected/runtime/info.log<cr>
+nnoremap ;ou :w<cr>:e ~/lb/admin2/admin-2_0-oss/admin/runtime/vardump.log<cr>
+"nnoremap ;ou :e ~/lb/11/lbcore/phpclient/client2/registration/runtime/vardump.log<cr>
+"nnoremap ;od :e /home/anshakov/sbss/web/admin/features/SBSSListUploader/log/debug.log<cr>
+nnoremap ;od :e ~/lb/admin2/admin-2_0-oss/admin/runtime/details.log<cr>
+"nnoremap ;od :e ~/lb/11/lbcore/phpclient/client2/registration/runtime/details.log<cr>
+"nnoremap ;od :e ~/lb/11/lbcore/phpclient/client2/protected/runtime/dev.log<cr>
+"nnoremap ;od :e ~/lb/20/admin/log/dev.log<cr>
+nnoremap ;oi :e ~/lb/admin2/admin-2_0-oss/admin/runtime/info.log<cr>
+"nnoremap ;oi :e ~/lb/11/lbcore/phpclient/client2/registration/runtime/info.log<cr>
 nnoremap ;oc :e ~/lb/11/lbcore/phpclient/client2/protected/config/lanbilling.config.php<cr>
+nnoremap ;cc :call<SID>CreateComment()<cr>
+nnoremap ;aa :call<SID>GrepProtected()<cr>
+nnoremap ;ch :call<SID>ClearCache()<cr>
+
+function! s:GrepProtected()
+    execute 'grep! --exclude=*.{swp,log} --exclude=*.log.* --exclude-dir=\"\\.svn\" --exclude-dir=docs -PR "protected[^ ]" .'
+endfunction
+
+function! s:ClearCache()
+    "let root = '/home/anshakov/lb/8009/client2-11-rm8009/protected'
+    let root = '/home/anshakov/lb/11/lbcore/phpclient/client2/client'
+    "let root = '/home/anshakov/lb/11clone/lbcore/phpclient/client2/client'
+    execute "normal!:r!sudo rm -rf ".root."/runtime/cache/*\<cr>"
+    execute "normal!:r!sudo rm -rf ".root."/public/assets/*\<cr>"
+endfunction
+
+function! s:LocalizeOption()
+    execute "normal!^vt-h\"jyf-l\"kyt.:w\<cr>"
+    let s:en = @j
+    call <SID>CreateLocTag()
+    execute "normal!a\<c-r>k\<esc>:w\<cr>"
+    execute "normal!:e localizes/ru/tpls/modules.tpl\<cr>'a?\<c-r>k\<cr>vt%hs\<c-r>j\<esc>:w\<cr>"
+endfunction
+
+function! s:AddOption()
+    execute "normal!^\"jyef-l\"kyt.:w\<cr>"
+    let name = @j
+    let label = @k
+    let variable = toupper(name)
+    execute "normal!:e localizes/ru/tpls/modules.tpl\<cr>'ak"
+    execute "normal!o<tr><td class=\"td_comm\" style=\"border: none\" width=\"80%\"><%@ ".label." %>:</td>"
+    execute "normal!o<td class=\"td_comm\" style=\"border: none\" width=\"20%\"><input type=\"text\" name=\"".name."\" value=\"{".variable."}\"></td></tr>"
+    execute "normal!:e modules.php\<cr>'a$%k"
+    execute "normal!o$tpl->setVariable(\"".variable."\", $_POST['".name."']);"
+    execute "normal!'s$%ko$_POST['".name."'] = isset($AOpt['".name."']) ? $AOpt['".name."']['value'] : '';"
+    execute "normal!'d$%kA,\<cr>'".name."'"
+endfunction
+
+function! s:ClientInfo()
+    execute "normal!^/clientInfo->account\<cr>/account\<cr>f>l\"jye?\\$this\\|Yii\\|yii\<cr>v/clientInfo->account\<cr>/account\<cr>f>lecyii::app()->lanbilling->getClient()->account->\<c-r>j\<esc>"
+endfunction
+
+function! s:CreateComment()
+    execute "normal!^/\\<function\\>\<cr>f(yi("
+    let fnline = line('.')
+    let arguments = split(@@, ',')
+    let vars = []
+    for item in arguments
+        let mtch = matchstr(item, '\$[a-zA-Z0-9\_]\+')
+        call add(vars, mtch)
+    endfor
+    let i = search('^[ ]*\*\/','b')
+    if i > 0
+        execute "normal!lv?^[ ]*\\/\\*\\*\<cr>y"
+        let fn = search('^[ ]*\(\(protected\|public\|private\|static\|abstract\) \)\+function','nW')
+        if fn == fnline
+            let i = 0
+            let returnind = -1
+            let lns = split(@@, '\n')
+            for item in lns
+                if returnind == -1
+                    let mtch = match(item, '@return\>')
+                    if mtch != -1
+                        let returnind = i
+                    endif
+                endif
+                let i += 1
+            endfor
+            if returnind == -1
+                let returnind = len(lns) - 1
+            endif
+            execute "normal!".returnind."j"
+            let existing = 1
+        else
+            execute "normal!:".fnline."\<cr>O/**\<cr> * <{}>\<cr>*/"
+            let existing = 0
+        endif
+    else
+        execute "normal!O/**\<cr> * <{}>\<cr>*/"
+        let existing = 0
+    endif
+    for item in vars
+        let ln = line('.') - 1
+        call append(ln, '     * @param <{}> '.item.' <{}>')
+    endfor
+    let up = len(vars)
+    if existing > 0
+        execute "normal!".up."k"
+    else
+        execute "normal!?^[ ]*\\/\\*\\*\<cr>"
+    endif
+endfunction
 
 function! s:LoadSoap()
     execute "normal!:r!cp ~/lb/11/lbcore/xmlapi/api3.wsdl soap\<cr>:e soap/api3.wsdl\<cr>G?127\<cr>ct:192.168.30.2"
@@ -169,11 +267,17 @@ function! s:BorderRadius()
     call <SID>RestoreRegister()
 endfunction
 
+function! s:CreateLocTag()
+    "call <SID>OpenFile('/home/anshakov/lb/20/admin/localizes/localize.xml')
+    "call <SID>OpenFile('/home/anshakov/sbss/web/admin/localizes/localize.xml')
+    call <SID>OpenFile('~/lb/11/lbcore/phpclient/admin/localizes/localize.xml')
+    execute "normal!Gkko<tu tuid=\"".s:en."\" datatype=\"plaintext\">\<cr>\<tab><tuv xml:lang=\"en\">\<cr>\<tab><seg>".s:en."</seg>\<cr>\<bs>\<bs>\<bs>\<bs></tuv>\<cr><tuv xml:lang=\"ru\">\<cr>\<tab><seg></seg>\<cr>\<bs>\<bs>\<bs>\<bs></tuv>\<cr>\<bs>\<bs>\<bs>\<bs></tu>\<esc>kkf>"
+endfunction
+
 function! s:AddToOldAdminLocalization()
     call <SID>SaveRegister()
     let s:en = <SID>YankInQuotes()
-    call <SID>OpenFile('/home/anshakov/lb/20/admin/localizes/localize.xml')
-    execute "normal!Gkko<tu tuid=\"".s:en."\" datatype=\"plaintext\">\<cr>\<tab><tuv xml:lang=\"en\">\<cr>\<tab><seg>".s:en."</seg>\<cr>\<bs>\<bs>\<bs>\<bs></tuv>\<cr><tuv xml:lang=\"ru\">\<cr>\<tab><seg></seg>\<cr>\<bs>\<bs>\<bs>\<bs></tuv>\<cr>\<bs>\<bs>\<bs>\<bs></tu>\<esc>kkf>"
+    call <SID>CreateLocTag()
     call <SID>RestoreRegister()
 endfunction
 
@@ -690,6 +794,8 @@ endfunction
 
 let s:app = '~/lb/admin2/admin-2_0-oss/public/app'
 let s:core = '~/lb/admin2/admin-2_0-oss/public/ext/src'
+"let s:protected = '~/lb/20/client2/protected'
+"let s:protected = '~/lb/11/lbcore/phpclient/client2/protected/'
 let s:protected = '~/lb/admin2/admin-2_0-oss/protected'
 let s:backend = s:protected.'/controllers/api'
 let s:appname = 'OSS'
@@ -746,8 +852,7 @@ function! s:AddLine(text)
 endfunction
 
 function! s:OpenLocalizationFile(file)
-    call <SID>OpenFile('/home/anshakov/lb/11/lbcore/phpclient/client2/protected/messages/ru/main.php')
-    "call <SID>OpenFile(s:protected.'/messages/ru/'.a:file.'.php')
+    call <SID>OpenFile(s:protected.'/messages/ru/'.a:file.'.php')
     call <SID>GoToTop()
     call <SID>FindInBuffer('\<return array')
 endfunction
