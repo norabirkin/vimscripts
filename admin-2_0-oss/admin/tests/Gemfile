@@ -1,0 +1,6 @@
+source "http://rubygems.org"
+
+gem 'rspec'
+gem 'capybara', '~> 2.1.0'
+gem 'poltergeist'
+gem 'selenium-webdriver'

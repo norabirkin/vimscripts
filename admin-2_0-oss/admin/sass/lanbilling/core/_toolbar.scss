@@ -1,0 +1,13 @@
+/**
+ *   Toolbars settings
+ */
+
+@include extjs-toolbar-ui(
+  "oss-app-menu",
+
+  $background-color: transparent
+);
+
+.#{$prefix}toolbar-oss-app-menu-bg {
+  background: theme-background-image($theme-name, 'toolbar/toolbar-oss-app-menu-bg.gif') repeat-x transparent;
+}

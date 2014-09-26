@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="admin-oss" basedir="." default="build">
+    <property name="VERSION" value="2.1" />
+    
+    <!-- Source files -->
+    <property name="source.dir" value="${project.basedir}" />
+    <property name="source.dir.contribs" value="${source.dir}/contribs" />
+    
+    <!-- Common build properties -->
+    <property name="build.mode" value="production" />
+    <property name="build.dir" value="${source.dir}/build" />
+    <property name="build.package.path" value="usr/local/billing/phpclient" />
+    <property name="build.pkg.files" value="${build.dir}/pkg" />
+    
+    <exec executable="date" outputProperty="build.date">
+        <arg line="+%Y%m%d" />
+    </exec>
+    
+    <if>
+        <os family="mac" />
+        <then>
+            <property name="utility.md5" value="md5 -r" />
+        </then>
+        <else>
+            <property name="utility.md5" value="md5sum" />
+        </else>
+    </if>
+    
+    <property name="package.prefix" value="LBphpclient" />
+    
+    <!-- Debian package variables -->
+    <property name="deb.root" value="${build.dir}/debian" />
+    <property name="deb.rules" value="${deb.root}/DEBIAN" />
+    <property name="deb.target" value="${deb.root}/usr/local/billing/phpclient" />
+    <property name="deb.etc.apache" value="${deb.root}/etc/apache2/sites-available" />
+    
+    <!-- RPM package variables -->
+    <property name="rpm.buildroot" value="${build.dir}/rpm" />
+    <property name="rpm.topdir" value="${build.dir}/rpmbuild" />
+    <property name="rpm.etc.apache" value="${rpm.buildroot}/etc/httpd/conf.d" />
+    
+    <!-- Common targets -->
+    <target name="build-mode" hidden="true">
+        <if>
+            <or>
+                <equals arg1="${mode}" arg2="production" />
+                <equals arg1="${mode}" arg2="testing" />
+            </or>
+            <then>
+                <property name="build.mode" value="${mode}" />
+            </then>
+        </if>
+        <echo msg="Build mode: ${build.mode}" />
+    </target>
+    
+    <target name="buildnum" hidden="true">
+        <if>
+            <not>
+                <isset property="build" />
+            </not>
+            <then>
+                <property name="VERSION.build" value="000" />
+            </then>
+            <else>
+                <property name="VERSION.build" value="${build}" />
+            </else>
+        </if>
+    </target>
+    
+    <target name="buildrevision" hidden="true">
+        <if>
+            <not>
+                <isset property="revision" />
+            </not>
+            <then><fail message="Revision must be set!" /></then>
+            <else>
+                <property name="VERSION.revision" value="${revision}" />
+            </else>
+        </if>
+    </target>
+    
+    <target name="copy-to-dir" hidden="true">
+        <echo msg="From: ${copy.source}; To: ${copy.target}" />
+        <if>
+            <not><isset property="copy.source" /></not>
+            <then><fail message="Unknown source to copy from!" /></then>
+        </if>
+        <if>
+            <not><isset property="copy.target" /></not>
+            <then><fail message="Unknown target to copy to!" /></then>
+        </if>
+        <if>
+            <not><isset property="copy.pattern" /></not>
+            <then><fail message="Unknown pattern to copy to!" /></then>
+        </if>
+        <copy todir="${copy.target}">
+            <fileset dir="${copy.source}">
+                <patternset includes="${copy.pattern}" />
+            </fileset>
+        </copy>
+    </target>
+    
+    <target name="prepare-build-dir" description="Recreate root `build` folder">
+        <delete dir="${build.dir}" quiet="true" />
+        <mkdir dir="${build.dir}" />
+    </target>
+    
+    <target name="copy-back-end" depends="build-mode" description="Copy back-end php files to the `build` folder">
+        <copy todir="${build.dir}">
+            <fileset dir="${source.dir}">
+                <patternset>
+                    <include name="framework/**" />
+                    <include name="components/**" />
+                    <include name="admin/**" />
+                    <exclude name="admin/public/**" />
+                </patternset>
+            </fileset>
+        </copy>
+        <delete dir="${build.dir}/admin/config/develop" includeemptydirs="true" verbose="true" failonerror="false" />
+        <delete file="${build.dir}/admin/controllers/DevController.php" verbose="true" failonerror="false" />
+        <delete quiet="true">
+            <fileset dir="${build.dir}/admin/runtime">
+                <include name="**" />
+            </fileset>
+        </delete>
+        <chmod file="${build.dir}/admin/runtime" mode="0777" />
+        <if>
+            <equals arg1="${build.mode}" arg2="production" />
+            <then>
+                <delete dir="${build.dir}/admin/tests" quiet='true' />
+                <delete dir="${build.dir}/admin/views/dev" quiet='true' />
+            </then>
+        </if>
+    </target>
+    
+    <target name="clear-front-end-cache" description="Clear front-end cache files">
+        <exec executable="sencha" dir="${source.dir}/admin/public" logoutput="true" checkreturn="true" passthru="true">
+            <arg value="ant" />
+            <arg value="clean" />
+        </exec>
+        
+        <exec executable="sencha" dir="${source.dir}/admin/public" logoutput="true" checkreturn="true" passthru="true">
+            <arg value="app" />
+            <arg value="refresh" />
+        </exec>
+    </target>
+    
+    <target name="build-front-end" depends="build-mode" description="Build front-end files according to the build mode">
+        <phingcall target="clear-front-end-cache" />
+        <exec executable="sencha" dir="${source.dir}/admin/public" logoutput="true" checkreturn="true" passthru="true">
+            <arg value="app" />
+            <arg value="build" />
+            <arg value="${build.mode}" />
+        </exec>
+    </target>
+    
+    <target name="copy-front-end" depends="build-mode, buildnum" description="Copy front-end built front-end files to the `build` folder">
+        <mkdir dir="${build.dir}/admin/public" />
+        <copy todir="${build.dir}/admin/public">
+            <fileset dir="${source.dir}/admin/public/build/${build.mode}/OSS">
+                <patternset>
+                    <include name="resources/**" />
+                    <include name="app.js" />
+                    <!-- <include name="config.rb" /> -->
+                    <!-- <include name="OSS-all.scss" /> -->
+                    <include name="../../../index.php" />
+                </patternset>
+            </fileset>
+        </copy>
+        <copy todir="${build.dir}/admin/public">
+            <fileset dir="${source.dir}/admin/public">
+                <patternset>
+                    <include name="index.php" />
+                </patternset>
+            </fileset>
+        </copy>
+        <reflexive>
+            <fileset dir="${build.dir}/admin/public">
+                <include name="index.php" />
+            </fileset>
+            
+            <filterchain>
+                <replaceregexp>
+                    <regexp pattern="\/\/.+remove.+production.+"
+                            replace="" />
+                    <regexp pattern="defined[\(\&quot;\'\s]+YII_DEVELOP.*"
+                            replace="" />
+                    <regexp pattern="(define[\(\&quot;\'\s]+YII_DEBUG[\)\,\&quot;\'\s]+)[\w\-\_]+"
+                            replace="\1false" />
+                    <regexp pattern="//&lt;develop&gt;.*//&lt;/develop&gt;"
+                            multiline="true" 
+                            replace="" />
+                </replaceregexp>
+                
+                <replacetokens begintoken="@" endtoken="@">
+                    <token key="DEVBUILD" value="${VERSION.build}-${build.date}" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+        <reflexive>
+            <fileset dir="${build.dir}/admin/views/layouts"> 
+                <include name="main.php" />
+            </fileset>
+            <filterchain>
+                <replacetokenswithfile 
+                    begintoken="&lt;!-- @build " 
+                    endtoken=" @ -->" 
+                    dir="${source.dir}/admin/public/build/${build.mode}/OSS/" 
+                    postfix=".html" 
+                    translatehtml="false" />
+                <replaceregexp>
+                    <regexp pattern="&lt;!-- @develop.*develop@ -->" 
+                        replace="" 
+                        ignoreCase="true" 
+                        multiline="true" />
+                </replaceregexp>
+            </filterchain>
+        </reflexive>
+    </target>
+    
+    <!-- Debian package build rules -->
+    <target name="debian" depends="buildnum, buildrevision, build" description="Create debian package">
+        <delete dir="${deb.root}" quiet='true' />
+        <mkdir dir="${deb.rules}" />
+        <mkdir dir="${deb.target}" />
+        
+        <!-- Copy admin interface from build dir -->
+        <phingcall target="copy-to-dir">
+            <property name="copy.target" value="${deb.target}" />
+            <property name="copy.source" value="${build.dir}" />
+            <property name="copy.pattern" value="**" />
+        </phingcall>
+        <!-- Copy client2 interface from contribs -->
+        <phingcall target="copy-to-dir">
+            <property name="copy.target" value="${deb.target}/client" />
+            <property name="copy.source" value="${source.dir.contribs}/client2" />
+            <property name="copy.pattern" value="**" />
+        </phingcall>
+        <!-- Copy apache congigs -->
+        <phingcall target="copy-to-dir">
+            <property name="copy.target" value="${deb.etc.apache}" />
+            <property name="copy.source" value="${source.dir.contribs}/configs/apache" />
+            <property name="copy.pattern" value="**" />
+        </phingcall>
+        
+        <php expression="date('YmdHis')" returnProperty="deb.control.package.time" />
+        <php expression="strtolower('${package.prefix}')" returnProperty="deb.control.prefix" />
+        <exec executable="du" outputProperty="deb.control.installed.size" escape="false">
+            <arg line="-sk ${deb.target} | awk '{print $1'}" />
+        </exec>
+        
+        <copy todir="${deb.rules}">
+            <filterchain>
+                <expandproperties />
+            </filterchain>
+            <fileset dir="${source.dir}/contribs/debian">
+                <include name="**" />
+            </fileset>
+        </copy>
+        
+        <exec executable="find" dir="${deb.root}" checkreturn="true">
+            <arg line="etc usr -type f -exec ${utility.md5} {} \; | sed 's/ \.\// /' >> DEBIAN/md5sums" />
+        </exec>
+
+        <exec executable="fakeroot" dir="${build.dir}" checkreturn="true" os="Linux">
+            <arg value="dpkg-deb" />
+            <arg line="-b debian" />
+            <arg value="${package.prefix}-${VERSION}oss-${VERSION.build}-Linux_noarch-${build.date}.deb" />
+        </exec>
+        
+        <if>
+            <available file="${build.dir}/${package.prefix}-${VERSION}oss-${VERSION.build}-Linux_noarch-${build.date}.deb" />
+            <then>
+		        <mkdir dir="${build.pkg.files}" />
+		        <move todir="${build.pkg.files}" 
+		            file="${build.dir}/${package.prefix}-${VERSION}oss-${VERSION.build}-Linux_noarch-${build.date}.deb" 
+		            overwrite="true" />
+            </then>
+        </if>
+    </target>
+    
+    <!-- RPM build rules -->
+    <target name="rpm" depends="buildnum, build" description="Create Redhat package">
+        <delete dir="${rpm.topdir}" quiet="true" />
+        <delete dir="${rpm.buildroot}" quiet="true" />
+        <mkdir dir="${rpm.buildroot}" />
+        <mkdir dir="${rpm.topdir}/RPMS" />
+        <mkdir dir="${rpm.topdir}/SPECS" />
+        
+        <!-- Copy admin interface from build dir -->
+        <phingcall target="copy-to-dir">
+            <property name="copy.target" value="${rpm.buildroot}/${build.package.path}" />
+            <property name="copy.source" value="${build.dir}" />
+            <property name="copy.pattern" value="**" />
+        </phingcall>
+        <!-- Copy client2 interface from contribs -->
+        <phingcall target="copy-to-dir">
+            <property name="copy.target" value="${rpm.buildroot}/${build.package.path}/client" />
+            <property name="copy.source" value="${source.dir.contribs}/client2" />
+            <property name="copy.pattern" value="**" />
+        </phingcall>
+        <!-- Copy apache congigs -->
+        <phingcall target="copy-to-dir">
+            <property name="copy.target" value="${rpm.etc.apache}" />
+            <property name="copy.source" value="${source.dir.contribs}/configs/apache" />
+            <property name="copy.pattern" value="**" />
+        </phingcall>
+        
+        <copy tofile="${rpm.topdir}/SPECS/${package.prefix}-${VERSION}oss-${VERSION.build}-Linux_noarch-${build.date}.spec"
+            file="${source.dir}/contribs/rpm/SPEC">
+            <filterchain>
+                <expandproperties />
+            </filterchain>
+        </copy>
+       
+        <exec executable="rpmbuild" dir="${build.dir}" os="Linux" checkreturn="true">
+            <arg line="--define '_topdir ${rpm.topdir}'" />
+            <arg value="--buildroot=${rpm.buildroot}" />
+            <arg value="-bb" />
+            <arg value="${rpm.topdir}/SPECS/${package.prefix}-${VERSION}oss-${VERSION.build}-Linux_noarch-${build.date}.spec" />
+        </exec>
+        
+        <if>
+            <available file="${rpm.topdir}/RPMS/noarch/${package.prefix}-${VERSION}-${VERSION.build}.noarch.rpm" />
+            <then>
+                <mkdir dir="${build.pkg.files}" />
+                <move tofile="${build.pkg.files}/${package.prefix}-${VERSION}oss-${VERSION.build}-Linux_noarch-${build.date}.rpm" 
+                    file="${rpm.topdir}/RPMS/noarch/${package.prefix}-${VERSION}-${VERSION.build}.noarch.rpm" 
+                    overwrite="true"
+                    haltonerror="true" />
+            </then>
+        </if>
+    </target>
+    
+    <!-- Default build rule -->
+    <target name="build" 
+        unless="build.complete" 
+        description="Default task to start build process for the back-end and from-end">
+        
+        <phingcall target="prepare-build-dir" />
+        <phingcall target="copy-back-end" />
+        <phingcall target="build-front-end" />
+        <phingcall target="copy-front-end" />
+        
+        <property name="build.complete" value="true" override="true" />
+    </target>
+    
+    <!-- Code Sniffer rules -->
+    <target name="check-mode" hidden="true">
+        <if>
+            <isset property="file" />
+            <then>
+                <available file="${file}" property="check.path" value="${file}" />
+                <property name="check.extensions" value="php,js" />
+            </then>
+            <elseif>
+                <equals arg1="${check}" arg2="js" />
+                <then>
+                    <property name="check.path" value="${source.dir}/admin/public/app/" />
+                    <property name="check.extensions" value="js" />
+                </then>
+            </elseif>
+            <elseif>
+                <equals arg1="${check}" arg2="php" />
+                <then>
+                    <property name="check.path" value="${source.dir}/admin/" />
+                    <property name="check.extensions" value="php" />
+                </then>
+            </elseif>
+            <else>
+                <property name="check.path" value="${source.dir}/admin/public/app/ ${source.dir}/admin/" />
+                <property name="check.extensions" value="php,js" />
+            </else>
+        </if>
+    </target>
+    
+    <target name="check-codesniffer" hidden="true">
+        <if>
+            <not>
+                <available file="${source.dir}/.codesniffer" type="dir" />
+            </not>
+            <then>
+                <mkdir dir="${source.dir}/.codesniffer" />
+            </then>
+        </if>
+        
+        <if>
+            <not>
+                <available file="${source.dir}/.codesniffer/codesniffer"/>
+            </not>
+            <then>
+                <exec executable="git" dir="${source.dir}" logoutput="true" checkreturn="true">
+                    <arg line="clone git@git.lanbilling.ru:web/codesniffer.git -b OSS ${source.dir}/.codesniffer/codesniffer" />
+                </exec>
+                <echo msg="Be shure You have installed JSHint utility. To install it look: http://www.jshint.com/install/" />
+                <echo msg="IMPORTANT! If instalation is not standard You need configure property `jshintPath` in ${source.dir}/.codesniffer/codesniffer/OSS/ruleset.xml" />
+                <echo msg="Installed JSHint version" />
+                <exec executable="jshint" logoutput="true" checkreturn="true">
+                    <arg value="-v" />
+                </exec>
+            </then>
+        </if>
+    </target>
+    
+    <target name="ccode" depends="check-mode, check-codesniffer" 
+        description="Run static code analysis to detect common programming errors and verify coding standard">
+        
+        <exec executable="phpcs" dir="${source.dir}" logoutput="true" passthru="true">
+            <arg value="-p" />
+            <arg value="--standard=${source.dir}/.codesniffer/codesniffer/OSS" />
+            <arg value="--report-full=${source.dir}/.codesniffer/report.log" />
+            <arg value="--report=summary" />
+            <arg value="--extensions=${check.extensions}" />
+            <arg line="--ignore=${source.dir}/admin/tests" />
+            <arg line="${check.path}" />
+        </exec>
+        
+        <echo msg="View full log: ${source.dir}/.codesniffer/report.log" />
+    </target>
+    
+    <!-- Refresh sencha application -->
+    <target name="refresh" 
+        description="Run refresh and prebuild theme commands for the sencha application">
+        
+        <phingcall target="clear-front-end-cache" />
+        <exec executable="sencha" dir="${source.dir}/admin/public" logoutput="true" checkreturn="true" passthru="true">
+            <arg value="app" />
+            <arg value="build" />
+            <arg value="testing" />
+        </exec>
+    </target>
+</project>

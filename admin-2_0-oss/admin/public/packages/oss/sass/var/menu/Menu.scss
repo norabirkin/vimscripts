@@ -1,0 +1,53 @@
+//menu
+
+/**
+ * @var {number}
+ * The font-size of {@link Ext.menu.Item Menu Items}
+ */
+$menu-item-font-size: 12px;
+
+/**
+ * @var {color}
+ * The background-color of the active {@link Ext.menu.Item Menu Item}
+ */
+$menu-item-active-background-color: darken(#f3f3f3, 5);
+
+/**
+ * @var {color}
+ * The border-color of the active {@link Ext.menu.Item Menu Item}
+ */
+$menu-item-active-border-color: #9d9d9d;
+
+/**
+ * @var {color}
+ * The border-color of {@link Ext.menu.Separator Menu Separators}
+ */
+$menu-separator-border-color: #e0e0e0;
+
+/**
+ * @var {string/list}
+ * The background-gradient for {@link Ext.menu.Item Menu Items}. Can be either the name
+ * of a predefined gradient or a list of color stops. Used as the `$type` parameter for
+ * {@link Global_CSS#background-gradient}.
+ */
+$menu-item-background-gradient: null;
+
+/**
+ * @var {number}
+ * The border-width of {@link Ext.menu.Item Menu Items}
+ */
+$menu-item-border-width: 1px;
+
+/**
+ * @var {number}
+ * The border-radius of {@link Ext.menu.Item Menu Items}
+ */
+$menu-item-active-border-radius: 3px;
+
+/**
+ * @var {string/list}
+ * The background-gradient for {@link Ext.menu.Item Menu Items}. Can be either the name
+ * of a predefined gradient or a list of color stops. Used as the `$type` parameter for
+ * {@link Global_CSS#background-gradient}.
+ */
+$menu-item-background-gradient: 'matte';

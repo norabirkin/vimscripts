@@ -1,0 +1,36 @@
+# These lines add alias to the default server configuration
+# Leave them as is if You do not have dedicated ServerName to configure
+# properly VirtualHost
+#
+# Comment these lines after properly configured VirtualHost
+Alias /client/ /usr/local/billing/phpclient/client/
+<Directory /usr/local/billing/phpclient/client>
+    Options FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    allow from all
+</Directory>
+
+# Server virtual host configuration
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    ServerName client.localhost
+    
+    DirectoryIndex index.php
+    
+    DocumentRoot /usr/local/billing/phpclient/client
+    <Directory />
+        Options FollowSymLinks
+        AllowOverride All
+        Order allow,deny
+        allow from all
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/error-oss-damin.log
+
+    # Possible values include: debug, info, notice, warn, error, crit,
+    # alert, emerg.
+    LogLevel warn
+
+    CustomLog ${APACHE_LOG_DIR}/access-oss-damin.log combined
+</VirtualHost>

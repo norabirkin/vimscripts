@@ -1,0 +1,15 @@
+{
+    "name": "oss",
+    "type": "theme",
+    "creator": "anonymous",
+    "summary": "Short summary",
+    "detailedDescription": "LANBilling OSS default theme",
+    "version": "1.0.0",
+    "compatVersion": "1.0.0",
+    "format": "1",
+    "local": true,
+    "requires": [
+        "oss-locale-ru"
+    ],
+    "extend": "ext-theme-gray"
+}

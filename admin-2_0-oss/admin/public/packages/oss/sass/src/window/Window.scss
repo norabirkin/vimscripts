@@ -1,0 +1,44 @@
+/**
+ *   Windows
+ */
+
+@include extjs-window-ui (
+    'authorize',
+    
+    $ui-padding: 0px,
+    $ui-border-radius: 0px,
+    $ui-border-color: null,
+    $ui-inner-border-color: null,
+    
+    $ui-header-color: null,
+    $ui-header-font-size: null,
+    $ui-header-font-weight: null,
+    
+    $ui-body-border-color: transparent,
+    $ui-body-background-color: transparent,
+    $ui-body-color: null,
+    
+    $ui-background-color: transparent
+);
+
+.#{$prefix}mask-modal-authorize {
+    background: none repeat scroll 0 0 #FFF;
+    @include opacity(1);
+}
+
+.#{$prefix}window-authorize-bg {
+    background: theme-background-image('logon/window-background', 'png') no-repeat transparent;
+}
+
+.#{$prefix}msg-trace {
+    margin-top: 15px;
+    overflow: auto;
+}
+
+#port-head-message {
+    left: 40%;
+    position: absolute;
+    top: 5px;
+    width: 250px;
+    z-index: 30003;
+}

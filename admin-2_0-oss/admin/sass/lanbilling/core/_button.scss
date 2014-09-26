@@ -1,0 +1,67 @@
+/**
+ *   Buttons
+ */
+
+@include extjs-button-ui(
+    "oss-app-menu-toolbar-medium",
+    
+    $border-width: 0px,
+    
+    $padding: 3px 10px,
+    $text-padding: $button-medium-text-padding,
+    
+    $color: $button-toolbar-color,
+    $color-over: $button-toolbar-color-over,
+    $color-focus: $button-toolbar-color-focus,
+    $color-pressed: $button-toolbar-color-pressed,
+    $color-disabled: $button-toolbar-color-disabled,
+    
+    $background-color: $button-toolbar-background-color,
+    $background-color-over: #F0F0F0,
+    $background-color-focus: $button-toolbar-background-color,
+    $background-color-pressed: #F0F0F0,
+    $background-color-disabled: $button-toolbar-background-color-disabled,
+    
+    $font-size: $button-medium-font-size,
+    $font-family: $button-medium-font-family,
+    
+    $icon-size: $button-medium-icon-size
+);
+
+
+@include extjs-button-ui(
+    "oss-authorize-small",
+    
+    $border-radius: 0px,
+    $border-width: 0px,
+
+    $color: #fff,
+    $color-over: #fff,
+    $color-focus: #fff,
+    $color-pressed: #fff,
+    $color-disabled: #fff,
+
+    $font-size: 14px,
+    
+    $font-weight: bold,
+
+    $icon-size: -4px
+);
+
+.#{$prefix}button-authorize-bg {
+    text-transform: uppercase;
+    background: theme-background-image($theme-name, 'logon/button-background.gif') no-repeat transparent;
+    
+    .#{$prefix}btn-icon {
+        left: 6px;
+    }
+}
+
+.#{$prefix}button-authorize-bg span {
+    line-height: 28px !important;
+}
+
+.#{$prefix}button-authorize-icon-dummy {
+    
+}
+

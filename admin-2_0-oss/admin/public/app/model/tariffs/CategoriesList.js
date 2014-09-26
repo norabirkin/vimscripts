@@ -1,0 +1,133 @@
+Ext.define('OSS.model.tariffs.CategoriesList', {
+    extend: 'Ext.data.Model',
+    idProperty: 'cat_idx',
+    proxy: {
+        type: 'rest',
+        url: Ext.Ajax.getRestUrl('api/tarCategoryExt'),
+        reader: {
+            type: 'json',
+            root: 'results',
+            totalProperty: 'total'
+        },
+        isValidId: function(id) {
+            return id || id === 0;
+        }
+    },
+    fields: [{
+        name: 'above',
+        type: 'float'
+    }, {
+        name: 'adm_block_above',
+        type: 'float'
+    }, {
+        name: 'archive',
+        type: 'int'
+    }, {
+        name: 'auto_assign',
+        type: 'int'
+    }, {
+        name: 'available',
+        type: 'int'
+    }, {
+        name: 'cat_id',
+        type: 'int'
+    }, {
+        name: 'cat_idx',
+        type: 'int',
+        useNull: true
+    }, {
+        name: 'cat_idx_master',
+        type: 'int'
+    }, {
+        name: 'cat_idx_master_descr',
+        type: 'string'
+    }, {
+        name: 'code_okei',
+        type: 'int'
+    }, {
+        name: 'common',
+        type: 'int'
+    }, {
+        name: 'descr',
+        type: 'string'
+    }, {
+        name: 'descr_full',
+        type: 'string'
+    }, {
+        name: 'dis_prior',
+        type: 'int'
+    }, {
+        name: 'dtv_type',
+        type: 'int'
+    }, {
+        name: 'enabled',
+        type: 'int'
+    }, {
+        name: 'free_seconds',
+        type: 'int'
+    }, {
+        name: 'includes',
+        type: 'int'
+    }, {
+        name: 'keep_turned_on',
+        type: 'int'
+    }, {
+        name: 'link',
+        type: 'string'
+    }, {
+        name: 'min_charge_dur',
+        type: 'int'
+    }, {
+        name: 'oper_id',
+        type: 'int'
+    }, {
+        name: 'oper_name',
+        type: 'string'
+    }, {
+        name: 'perm_above',
+        type: 'float'
+    }, {
+        name: 'round_seconds',
+        type: 'int'
+    }, {
+        name: 'sale_dictionary_id',
+        type: 'int'
+    }, {
+        name: 'script',
+        type: 'string'
+    }, {
+        name: 'script_off',
+        type: 'string'
+    }, {
+        name: 'serv_func_id',
+        type: 'int'
+    }, {
+        name: 'tar_id',
+        type: 'int'
+    }, {
+        name: 'usbox_count',
+        type: 'int'
+    }, {
+        name: 'usr_block_above',
+        type: 'float'
+    }, {
+        name: 'uuid',
+        type: 'string'
+    }, {
+        name: 'tar_type',
+        type: 'int'
+    }, {
+        name: 'master',
+        type: 'string'
+    }, {
+        name: 'catalog',
+        type: 'string'
+    }, {
+        name: 'service_code',
+        type: 'string'
+    }],
+    save: function() {
+        this.phantom = !this.hasId();
+        this.callParent(arguments);
+    }
+});

@@ -1,0 +1,1 @@
+<div id="oss-app-loading"><?php print $message; ?>...</div>

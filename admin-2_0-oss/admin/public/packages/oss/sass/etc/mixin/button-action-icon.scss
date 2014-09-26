@@ -1,0 +1,13 @@
+/**
+ * 
+ */
+@mixin button-action-icon (
+    $ui,
+    
+    $image: null,
+    $extention: null
+) {
+    .#{$prefix}#{$prefix-icon-btn}#{$ui} {
+         background: theme-background-image($image, $extention) no-repeat transparent;
+    }
+}

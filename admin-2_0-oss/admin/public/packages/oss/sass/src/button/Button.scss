@@ -1,0 +1,104 @@
+/**
+ *   Buttons
+ */
+
+// Default classes for the button icons
+.#{$prefix}#{$prefix-icon-btn}def, .#{$prefix}#{$prefix-icon-btn}def-dis {
+    background-position: 0 0 !important;
+    width: 18px;
+    height: 17px;
+    cursor: pointer;  
+}
+
+.#{$prefix}#{$prefix-icon-btn}def-dis {
+    background-position: 0 -16px !important;
+    cursor: default !important;
+}
+
+@import 'Icon';
+
+@include extjs-button-ui(
+    "oss-app-menu-toolbar-medium",
+    
+    $border-width: 0px,
+    
+    $padding: 3px 10px,
+    $text-padding: $button-medium-text-padding,
+    
+    $color: $button-toolbar-color,
+    $color-over: $button-toolbar-color-over,
+    $color-focus: $button-toolbar-color-focus,
+    $color-pressed: $button-toolbar-color-pressed,
+    $color-disabled: $button-toolbar-color-disabled,
+    
+    $background-color: $button-toolbar-background-color,
+    $background-color-over: #F0F0F0,
+    $background-color-focus: $button-toolbar-background-color,
+    $background-color-pressed: #F0F0F0,
+    $background-color-disabled: $button-toolbar-background-color-disabled,
+    
+    $font-size: 12px,
+    
+    $font-family: $button-medium-font-family,
+    $font-family-over: $button-medium-font-family-over,
+    $font-family-focus: $button-medium-font-family-focus,
+    $font-family-pressed: $button-medium-font-family-pressed,
+    $font-family-disabled: $button-medium-font-family-disabled,
+    
+    $icon-size: $button-medium-icon-size,
+    
+    $glyph-color: $button-default-glyph-color,
+    $glyph-opacity: .1,
+    
+    $include-ui-menu-arrows: false,
+    
+    $arrow-width: 15px
+);
+
+
+@include extjs-button-ui(
+    "oss-authorize-small",
+    
+    $border-radius: 0px,
+    $border-width: 0px,
+
+    $color: #fff,
+    $color-over: #fff,
+    $color-focus: #fff,
+    $color-pressed: #fff,
+    $color-disabled: #fff,
+
+    $font-size: 14px,
+    
+    $font-weight: bold,
+    
+    $font-family: $button-small-font-family,
+    $font-family-over: $button-small-font-family-over,
+    $font-family-focus: $button-small-font-family-focus,
+    $font-family-pressed: $button-small-font-family-pressed,
+    $font-family-disabled: $button-small-font-family-disabled,
+    
+    $icon-size: -4px,
+    
+    $background-color: $button-toolbar-background-color,
+    $glyph-color: $button-default-glyph-color,
+    $glyph-opacity: .1
+);
+
+.#{$prefix}button-authorize-bg {
+    text-transform: uppercase;
+    background: theme-background-image('logon/button-background') no-repeat transparent;
+    
+    .#{$prefix}btn-icon {
+        left: 6px;
+    }
+}
+
+.#{$prefix}button-authorize-bg span {
+    line-height: 28px !important;
+}
+
+.#{$prefix}button-authorize-icon-dummy {
+    
+}
+

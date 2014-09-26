@@ -1,0 +1,22 @@
+Summary:        Web based interface to manage billing system
+Name:           ${package.prefix}
+Version:        ${VERSION}
+Release:        ${VERSION.build}
+License:        GPL-3
+URL:            http://www.lanbilling.ru
+Group:          Applications/Communications
+Packager:       Network Solutions <support@lanbilling.ru>
+AutoReq:        no
+Requires(post): php > 5.3.3
+BuildArch:      noarch
+%description
+Web based interface to manage LANBilling system. Contains web console for the 
+billing management and company client's web console to control personal service
+
+%%files
+%%defattr (-,root,root)
+%%doc
+
+/etc/httpd/conf.d/oss-admin.sample
+/etc/httpd/conf.d/oss-client.sample
+/usr/local/billing/phpclient/

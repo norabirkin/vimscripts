@@ -1,0 +1,58 @@
+/**
+ *   Button icons
+ */
+
+/**
+ *  Menu icons
+ */
+@include button-action-icon ('gray-man', 'ibtn/item-gray-man', 'png');
+@include button-action-icon ('gray-object', 'ibtn/item-gray-object', 'png');
+@include button-action-icon ('gray-prop', 'ibtn/item-gray-prop', 'png');
+@include button-action-icon ('gray-chart', 'ibtn/item-gray-chart', 'png');
+@include button-action-icon ('gray-tool', 'ibtn/item-gray-tool', 'png');
+@include button-action-icon ('gray-wait', 'ibtn/item-gray-wait', 'png');
+@include button-action-icon ('gray-info', 'ibtn/item-gray-info', 'png');
+@include button-action-icon ('gray-state', 'ibtn/item-gray-state', 'png');
+@include button-action-icon ('gray-exit', 'ibtn/item-gray-exit', 'png');
+
+@include button-action-icon ('word', 'ibtn/document-word', 'png');
+@include button-action-icon ('excel', 'ibtn/document-excel', 'png');
+
+@include button-action-icon ('lock', 'ibtn/item-lock', 'png');
+@include button-action-icon ('key', 'ibtn/item-key', 'png');
+@include button-action-icon ('money', 'ibtn/item-money', 'png');
+@include button-action-icon ('chart', 'ibtn/item-chart', 'png');
+@include button-action-icon ('add', 'ibtn/item-add', 'png');
+@include button-action-icon ('info-sprite', 'ibtn/item-info-sprite', 'png');
+@include button-action-icon ('info', 'ibtn/item-info', 'png');
+@include button-action-icon ('help', 'ibtn/item-info', 'gif');
+@include button-action-icon ('edit', 'ibtn/item-edit', 'png');
+@include button-action-icon ('remove', 'ibtn/item-remove', 'png');
+@include button-action-icon ('save', 'ibtn/item-save', 'png');
+@include button-action-icon ('delete', 'ibtn/item-delete', 'png');
+@include button-action-icon ('clear', 'ibtn/item-clear', 'png');
+@include button-action-icon ('list', 'ibtn/item-list', 'png');
+@include button-action-icon ('list2', 'ibtn/item-list2', 'png');
+@include button-action-icon ('loading', 'grid/loading', 'gif');
+@include button-action-icon ('search', 'ibtn/item-search', 'png');
+
+@include button-action-icon ('user', 'ibtn/item-user', 'png');
+@include button-action-icon ('user-blocked', 'ibtn/item-user-blocked', 'png');
+@include button-action-icon ('user-add', 'ibtn/item-user-add', 'png');
+@include button-action-icon ('user-edit', 'ibtn/item-user-edit', 'png');
+@include button-action-icon ('users', 'ibtn/item-users', 'png');
+@include button-action-icon ('users-add', 'ibtn/item-users-add', 'png');
+@include button-action-icon ('users-edit', 'ibtn/item-users-edit', 'png');
+@include button-action-icon ('search', 'ibtn/item-search', 'png');
+@include button-action-icon ('prev', 'ibtn/item-arrow-left', 'png');
+@include button-action-icon ('next', 'ibtn/item-arrow-right', 'png');
+@include button-action-icon ('additional', 'ibtn/item-additional', 'png');
+
+@include button-action-icon ('address', 'ibtn/item-address', 'png');
+@include button-action-icon ('calculator', 'ibtn/item-calculator', 'png');
+@include button-action-icon ('calendar', 'ibtn/item-calendar', 'png');
+@include button-action-icon ('clock', 'ibtn/item-clock', 'png');
+@include button-action-icon ('copy', 'ibtn/item-copy', 'png');
+
+@include button-action-icon ('reload', 'ibtn/item-arrow-reload', 'png');
+@include button-action-icon ('unlock', 'ibtn/item-unlock', 'png');

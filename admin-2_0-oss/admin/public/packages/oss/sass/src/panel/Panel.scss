@@ -1,0 +1,241 @@
+/**
+ *   Toolbar interfaces
+ */
+
+
+/**
+ *   Header panel
+ */
+@include extjs-panel-ui(
+  'oss-header',
+  
+  $ui-body-border-color: white,
+  $ui-body-border-width: 0px 0px 3px 0px,
+  
+  $ui-body-background-color: #054B81
+);
+
+
+/**
+ *   Header items
+ */
+.#{$prefix}panel-oss-header-logo {
+  margin: 5px 60px 0 20px;
+  background: theme-background-image('logo/logo_lb2', 'png') no-repeat transparent;
+}
+
+.#{$prefix}panel-oss-header-fill {
+  background: theme-background-image('logo/header-center-fill', 'png') repeat-y transparent;
+}
+
+
+.#{$prefix}panel-oss-header-spacer {
+  width: 4px;
+  background: theme-background-image('logo/header-panel-spacer', 'gif') no-repeat transparent;
+}
+
+.#{$prefix}panel-oss-header-info {
+  padding: 0 7px;
+  background: theme-background-image('logo/header-panel-info-bg', 'gif') repeat-x transparent;
+}
+
+.#{$prefix}panel-oss-header-info-msg {
+  padding: 2px 0 0 0;
+}
+
+/**
+ *   Lagnuges
+ */
+.#{$prefix}app-lang-ru {
+  background: theme-background-image('language/ru', 'png') no-repeat 0 3px transparent;
+}
+
+.#{$prefix}app-lang-en {
+  background: theme-background-image('language/gb', 'png') no-repeat 0 3px transparent;
+}
+
+/**
+ *   Footer panel
+ */
+@include extjs-panel-ui(
+  'oss-footer',
+  
+  $ui-body-border-color: #4D4D4D,
+  $ui-body-border-width: 3px 0px 0px 0px
+);
+
+
+/**
+ *   Footer items
+ */
+.#{$prefix}panel-oss-footer-logo {
+  width: 140px;
+  height: 33px;
+  margin: 0 60px 0 20px;
+  background: theme-background-image('logo/logo_grey', 'png') no-repeat transparent;
+}
+
+.#{$prefix}panel-oss-footer-copyright {
+  padding: 0 0 0 30px;
+  text-indent: -11px;
+}
+
+
+/**
+ *   OSS application menu panel
+ */
+@include extjs-panel-ui(
+  'oss-app-menu',
+  
+  $ui-body-border-width: 0px
+);
+
+
+
+/**
+ *  Grid print Plugin css
+ */
+
+html.#{$prefix}ux-grid-printer, .#{$prefix}ux-grid-printer div, .#{$prefix}ux-grid-printer dl, .#{$prefix}ux-grid-printer dt, .#{$prefix}ux-grid-printer dd,
+.#{$prefix}ux-grid-printer ul, .#{$prefix}ux-grid-printer ol, .#{$prefix}ux-grid-printer li, .#{$prefix}ux-grid-printer h1, .#{$prefix}ux-grid-printer h2,
+.#{$prefix}ux-grid-printer h3, .#{$prefix}ux-grid-printer h4, .#{$prefix}ux-grid-printer h5, .#{$prefix}ux-grid-printer h6, .#{$prefix}ux-grid-printer pre, .#{$prefix}ux-grid-printer form,
+.#{$prefix}ux-grid-printer fieldset, .#{$prefix}ux-grid-printer input, .#{$prefix}ux-grid-printer p, .#{$prefix}ux-grid-printer blockquote, .#{$prefix}ux-grid-printer th, .#{$prefix}ux-grid-printer td {
+  margin: 0;
+  padding: 0;
+}
+
+html.#{$prefix}ux-grid-printer, .#{$prefix}ux-grid-printer img, .#{$prefix}ux-grid-printer body {
+  border: 0;
+}
+
+.#{$prefix}ux-grid-printer address, .#{$prefix}ux-grid-printer caption, .#{$prefix}ux-grid-printer cite, .#{$prefix}ux-grid-printer code, .#{$prefix}ux-grid-printer dfn, .#{$prefix}ux-grid-printer em, .#{$prefix}ux-grid-printer strong, .#{$prefix}ux-grid-printer th, .#{$prefix}ux-grid-printer var {
+  font-style: normal;
+  font-weight: normal;
+}
+
+.#{$prefix}ux-grid-printer ol, .#{$prefix}ux-grid-printer ul {
+  list-style: none;
+}
+
+.#{$prefix}ux-grid-printer caption, .#{$prefix}ux-grid-printer th {
+  text-align: left;
+}
+
+.#{$prefix}ux-grid-printer h1, .#{$prefix}ux-grid-printer h2, .#{$prefix}ux-grid-printer h3, .#{$prefix}ux-grid-printer h4, .#{$prefix}ux-grid-printer h5, .#{$prefix}ux-grid-printer h6 {
+  font-size: 100%;
+}
+
+.#{$prefix}ux-grid-printer q:before, .#{$prefix}ux-grid-printer q:after {
+  content: '';
+}
+
+.#{$prefix}ux-grid-printer .#{$prefix}ux-grid-printer-links {
+  padding: 0 0 20px 0;
+}
+
+.#{$prefix}ux-grid-printer table {
+  width: 100%;
+  text-align: left;
+  font-size: 11px;
+  font-family: arial;
+  border-collapse: collapse;
+}
+
+.#{$prefix}ux-grid-printer table th {
+  font-weight: bold;
+  padding: 4px 3px 4px 5px;
+  border: 1px solid #d0d0d0;
+  border-left-color: #eee;
+  background-color: #ededed;
+}
+
+.#{$prefix}ux-grid-printer table tr.odd {
+  background-color: #ffffff;
+}
+
+.#{$prefix}ux-grid-printer table tr.even {
+  background-color: #f9f9f9;
+}
+
+
+.#{$prefix}ux-grid-printer table td {
+  padding: 4px 3px 4px 5px;
+  border-style: none solid solid;
+  border-width: 1px;
+  border-color: #ededed;
+}
+
+.#{$prefix}ux-grid-printer a.#{$prefix}ux-grid-printer-linkprint {
+  padding: 0 0 0 18px;
+  margin: 0 5px;
+  background: url(images/ibtn/item-print.png) no-repeat bottom left !important;
+}
+
+.#{$prefix}ux-grid-printer a.#{$prefix}ux-grid-printer-linkclose {
+  padding: 0 0 0 18px;
+  margin: 0 5px;
+  background: url(images/ibtn/item-delete.png) no-repeat bottom left !important;
+}
+
+@media print {
+  .#{$prefix}ux-grid-printer body {
+    margin: 0;
+    padding: 0;
+  }
+
+  .#{$prefix}ux-grid-printer div.#{$prefix}ux-grid-printer-noprint {
+    display: none;
+  }
+}
+
+.group-header {
+  border-bottom: 2px solid black;
+  font-size: 14px;
+}
+
+.#{$prefix}type-payment-edited {
+    background-color: #DBE6F2!important;
+}
+.#{$prefix}type-payment-corrected {
+    background-color: #FACA82!important;
+}
+.#{$prefix}type-payment-canceled {
+    background-color: #FCA4A4!important;
+}
+.#{$prefix}type-payment-transfer {
+    background-color: #B5FFBE!important;
+}
+.#{$prefix}type-payment-part-transfer {
+    background-color: #9494FF!important;
+}
+.#{$prefix}type-payment-bso {
+    background-color: #E496FF!important;
+}
+
+.#{$prefix}progress-wrap {  
+    border: solid 1px #c0c0c0;
+    background-color: #ffffff;
+    width: 120px; height: 12px;
+}
+
+.#{$prefix}progress-value {  
+    width: 120px; height: 10px;
+}
+
+.#{$prefix}line-outer {  
+    display: block;
+    position: relative;
+    padding: 0px;
+}
+
+.#{$prefix}line-inner {
+    display: inline;
+    float: left;
+    margin-left: 0px;
+    padding: 0px;
+}
+
+.#{$prefix}mask-msg-no-image .#{$prefix}mask-msg-text {
+    padding: 5px 5px 5px 5px !important;
+    background-image: none !important;
+}

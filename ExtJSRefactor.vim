@@ -60,7 +60,7 @@ nnoremap ;od :e ~/lb/admin2/admin-2_0-oss/admin/runtime/details.log<cr>
 "nnoremap ;od :e ~/lb/20/admin/log/dev.log<cr>
 nnoremap ;oi :e ~/lb/admin2/admin-2_0-oss/admin/runtime/info.log<cr>
 "nnoremap ;oi :e ~/lb/11/lbcore/phpclient/client2/registration/runtime/info.log<cr>
-nnoremap ;oc :e ~/lb/11/lbcore/phpclient/client2/protected/config/lanbilling.config.php<cr>
+nnoremap ;of :e ~/lb/admin2/admin-2_0-oss/admin/config/develop/settings.php<cr>
 nnoremap ;cc :call<SID>CreateComment()<cr>
 nnoremap ;aa :call<SID>GrepProtected()<cr>
 nnoremap ;ch :call<SID>ClearCache()<cr>
@@ -792,11 +792,11 @@ function! s:ReplaceInsideNearestQuotes(replace)
     return @@
 endfunction
 
-let s:app = '~/lb/admin2/admin-2_0-oss/public/app'
-let s:core = '~/lb/admin2/admin-2_0-oss/public/ext/src'
+let s:app = '~/lb/admin2/admin-2_0-oss/admin/public/app'
+let s:core = '~/lb/admin2/admin-2_0-oss/admin/public/ext/src'
 "let s:protected = '~/lb/20/client2/protected'
 "let s:protected = '~/lb/11/lbcore/phpclient/client2/protected/'
-let s:protected = '~/lb/admin2/admin-2_0-oss/protected'
+let s:protected = '~/lb/admin2/admin-2_0-oss/admin'
 let s:backend = s:protected.'/controllers/api'
 let s:appname = 'OSS'
 

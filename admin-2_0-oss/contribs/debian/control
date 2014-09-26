@@ -1,0 +1,11 @@
+Package: ${deb.control.prefix}
+Priority: extra
+Section: misc
+Installed-Size: ${deb.control.installed.size}
+Maintainer: Network Solutions <support@lanbilling.ru>
+Homepage: http://www.lanbilling.ru
+Architecture: all
+Version: ${VERSION}oss-${VERSION.build}-${deb.control.package.time}+${VERSION.revision}
+Depends: php5 (>=5.3.3)
+Description: Web based interface to manage billing system
+
