@@ -75,8 +75,13 @@ func (j *japi) Send() {
 
 	if c, e := net.Dial("tcp", "192.168.30.10:1502"); e == nil {
 		fmt.Fprint(c, s)
+		fmt.Println("REQUEST")
+		fmt.Println(s)
+		fmt.Println("")
+		fmt.Println("RESPONSE")
 		for i := 0; i < j.id; i++ {
 			l, e := bufio.NewReader(c).ReadString('\n')
+			fmt.Println(l)
 			if e != nil {
 				fmt.Println(e)
 			}
@@ -84,6 +89,7 @@ func (j *japi) Send() {
 			json.Unmarshal([]byte(l), &d)
 			j.response[i].Init(d)
 		}
+		fmt.Println("")
 		c.Close()
 		j.id = 0
 		j.request = []japiCall{}

@@ -15,7 +15,9 @@ type IController interface {
 	Delete(i int)
 	Create()
 	Update(i int)
-	Init(w http.ResponseWriter, b map[string]interface{}, q map[string][]string, r *http.Request)
+	Init(w http.ResponseWriter, b map[string]interface{}, q map[string][]string, r *http.Request, j japi)
+	OpenSession()
+	CloseSession()
 }
 
 type Controller struct {
@@ -23,6 +25,8 @@ type Controller struct {
 	Body    map[string]interface{}
 	Query   map[string][]string
 	Request *http.Request
+	Japi    japi
+	sessid  string
 }
 
 func (c *Controller) Output(v interface{}) {
@@ -47,11 +51,45 @@ func (c *Controller) Error(v interface{}) {
 	})
 }
 
-func (c *Controller) Init(w http.ResponseWriter, b map[string]interface{}, q map[string][]string, r *http.Request) {
+func (c *Controller) OpenSession() {
+	var cookie *http.Cookie
+	var sessid string
+	var e error
+
+	if cookie, e = c.Request.Cookie("SESSID"); e == nil {
+		sessid = cookie.Value
+	} else {
+		fmt.Printf("ERROR: %v", e)
+	}
+
+	r := c.Japi.CallAndSend("WebSessionHandler", map[string]interface{}{
+		"event":      "open",
+		"id":         sessid,
+		"time_stamp": 0,
+		"data":       "",
+	})
+	c.sessid = r.(map[string]interface{})["id"].(string)
+	http.SetCookie(c.Writer, &http.Cookie{
+		Name:  "SESSID",
+		Value: c.sessid,
+	})
+}
+
+func (c *Controller) CloseSession() {
+	c.Japi.CallAndSend("WebSessionHandler", map[string]interface{}{
+		"event":      "close",
+		"id":         c.sessid,
+		"time_stamp": 0,
+		"data":       "",
+	})
+}
+
+func (c *Controller) Init(w http.ResponseWriter, b map[string]interface{}, q map[string][]string, r *http.Request, j japi) {
 	c.Writer = w
 	c.Body = b
 	c.Query = q
 	c.Request = r
+	c.Japi = j
 }
 
 func (c *Controller) ParSet(n string) bool {
@@ -177,23 +215,6 @@ func run(c IController, r *http.Request, i int) {
 	}
 }
 
-func authorize() interface{} {
-	j := japi{}
-	r := j.CallAndSend("WebSessionHandler", map[string]interface{}{
-		"event":      "open",
-		"id":         "",
-		"time_stamp": 0,
-		"data":       "",
-	})
-	j.CallAndSend("WebSessionHandler", map[string]interface{}{
-		"event":      "close",
-		"id":         "",
-		"time_stamp": 0,
-		"data":       "",
-	})
-	return r
-}
-
 func process(w http.ResponseWriter, r *http.Request) {
 	var c string
 	var i int
@@ -214,7 +235,10 @@ func process(w http.ResponseWriter, r *http.Request) {
 		d := json.NewDecoder(r.Body)
 		d.Decode(&o)
 		m := r.Form
-		t.Init(w, o, m, r)
+		j := japi{}
+		t.Init(w, o, m, r, j)
+		t.OpenSession()
 		run(t, r, i)
+		t.CloseSession()
 	}
 }

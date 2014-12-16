@@ -1,10 +1,5 @@
 package main
 
-import (
-	"fmt"
-	"net/http"
-)
-
 type bye struct {
 	Controller
 }
@@ -41,33 +36,12 @@ func (b bye) Create() {
 
 func (b bye) Update(id int) {
 	var err string
-	var sessid string
-	var cookie *http.Cookie
-	var e error
 
-	if cookie, e = b.Request.Cookie("SESSID"); e == nil {
-		sessid = cookie.Value
-	} else {
-		fmt.Printf("ERROR: %v", e)
-	}
-
-	j := japi{}
-	o := j.Call("WebSessionHandler", map[string]interface{}{
-		"event":      "open",
-		"id":         sessid,
-		"time_stamp": 0,
-		"data":       "",
-	})
-	er := j.Call("WrongFunctionName", map[string]interface{}{
+	er := b.Japi.Call("WrongFunctionName", map[string]interface{}{
 		"param1": "val1",
 		"param2": "val2",
 	})
-	j.Send()
-	r := o.Result()
-	http.SetCookie(b.Writer, &http.Cookie{
-		Name:  "SESSID",
-		Value: r.(map[string]interface{})["id"].(string),
-	})
+	b.Japi.Send()
 	if er.IsError() {
 		err = er.Error()
 	}
@@ -82,7 +56,6 @@ func (b bye) Update(id int) {
 		"param5":     b.ParS("param5"),
 		"param6":     b.ParI("param6"),
 		"param7":     b.ParF("param7"),
-		"open":       r,
 		"error":      err,
 	})
 }
