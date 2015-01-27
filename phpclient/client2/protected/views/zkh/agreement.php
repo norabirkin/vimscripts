@@ -1,1 +1,0 @@
-<div class="tabcontent"><?php echo $vgroups; ?></div>

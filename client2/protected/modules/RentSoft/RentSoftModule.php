@@ -1,1 +1,0 @@
-<?php class RentSoftModule extends CWebModule {} ?>

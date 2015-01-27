@@ -1,9 +1,0 @@
---- headers.php	(revision 42942)
-+++ headers.php	(revision 43111)
-@@ -1,5 +1,5 @@
- <tr class="grid-head">
-     <?php $first = true; foreach( $columns as $column ) { ?>
--    <th<?php if ($first) { ?> class="first_col"<?php } ?>><?php echo $column; ?></th>
-+    <th<?php if ($column['width']) { ?> width="<?php echo $column['width']; ?>"<?php } ?><?php if ($first) { ?> class="first_col"<?php } ?>><?php echo $column['title']; ?></th>
-     <?php $first = false; } ?>
- </tr>

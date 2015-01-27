@@ -1,3 +1,0 @@
-
-php_value session.gc_maxlifetime 86400
-php_value date.timezone Europe/Moscow

@@ -2,9 +2,9 @@ match ErrorMsg '\%>80v.\+'
 nnoremap ;bb ggO#!/bin/bash<esc>:r!chmod 777 <c-r>%<cr>
 nnoremap ;rr :call <SID>RenameRecursive()<cr>
 nnoremap ;oo :call <SID>OpenExtJSClass('')<cr>
-nnoremap ;ov :call <SID>OpenExtJSClass('OSS.view.')<cr>
-nnoremap ;oc :call <SID>OpenExtJSClass('OSS.controller.')<cr>
-nnoremap ;os :call <SID>OpenExtJSClass('OSS.store.')<cr>
+nnoremap ;ov :call <SID>OpenExtJSClass('.view.')<cr>
+nnoremap ;oc :call <SID>OpenExtJSClass('.controller.')<cr>
+nnoremap ;os :call <SID>OpenExtJSClass('.store.')<cr>
 nnoremap ;ob :call <SID>OpenBackAndController()<cr>
 nnoremap ;rc :call <SID>RenameClass()<cr>
 nnoremap ;tc :call<SID>LocalizeConfirm()<cr>
@@ -31,6 +31,7 @@ nnoremap ;tj :call<SID>NextT()<cr>
 nnoremap ;sj :call<SID>SnippetJoin()<cr>
 nnoremap ;sf :call<SID>FromSystemGetFunctors()<cr>
 nnoremap ;sp :call<SID>FromSystemGetFunctorsForBackEnd()<cr>
+nnoremap ;sb :r!patch -p2 < ~/tmps/sbsspatch<cr>
 nnoremap ;ii :call<SID>ReplaceWithNewLocalization()<cr>
 nnoremap ;sc :call<SID>SetController()<cr>
 nnoremap ;ir :call<SID>ItemRegister()<cr>
@@ -62,19 +63,20 @@ nnoremap ;oi :e ~/lb/admin2/admin-2_0-oss/admin/runtime/info.log<cr>
 "nnoremap ;oi :e ~/lb/11/lbcore/phpclient/client2/registration/runtime/info.log<cr>
 nnoremap ;of :e ~/lb/admin2/admin-2_0-oss/admin/config/develop/settings.php<cr>
 nnoremap ;cc :call<SID>CreateComment()<cr>
-nnoremap ;aa :call<SID>GrepProtected()<cr>
-nnoremap ;ch :call<SID>ClearCache()<cr>
+nnoremap ;aa :!/home/anshakov/tmps/regformcompile<cr>
+nnoremap ;az :!/home/anshakov/tmps/regformcompile_base<cr>
+nnoremap ;ch :!/home/anshakov/tmps/clearcache<cr>
+
+function! s:Createarray()
+    execute "normal!^dt$\"jyf=wv/;\<cr>\"ks'\<c-r>j' => \<esc>\jp"
+endfunction
 
 function! s:GrepProtected()
     execute 'grep! --exclude=*.{swp,log} --exclude=*.log.* --exclude-dir=\"\\.svn\" --exclude-dir=docs -PR "protected[^ ]" .'
 endfunction
 
 function! s:ClearCache()
-    "let root = '/home/anshakov/lb/8009/client2-11-rm8009/protected'
-    let root = '/home/anshakov/lb/11/lbcore/phpclient/client2/client'
-    "let root = '/home/anshakov/lb/11clone/lbcore/phpclient/client2/client'
-    execute "normal!:r!sudo rm -rf ".root."/runtime/cache/*\<cr>"
-    execute "normal!:r!sudo rm -rf ".root."/public/assets/*\<cr>"
+    execute "normal!:!/home/anshakov/lb/11/lbcore/phpclient/client2/client/ch\<cr>"
 endfunction
 
 function! s:LocalizeOption()
@@ -269,8 +271,8 @@ endfunction
 
 function! s:CreateLocTag()
     "call <SID>OpenFile('/home/anshakov/lb/20/admin/localizes/localize.xml')
-    "call <SID>OpenFile('/home/anshakov/sbss/web/admin/localizes/localize.xml')
-    call <SID>OpenFile('~/lb/11/lbcore/phpclient/admin/localizes/localize.xml')
+    call <SID>OpenFile('/home/anshakov/sbss/web/admin/localizes/localize.xml')
+    "call <SID>OpenFile('~/lb/11/lbcore/phpclient/admin/localizes/localize.xml')
     execute "normal!Gkko<tu tuid=\"".s:en."\" datatype=\"plaintext\">\<cr>\<tab><tuv xml:lang=\"en\">\<cr>\<tab><seg>".s:en."</seg>\<cr>\<bs>\<bs>\<bs>\<bs></tuv>\<cr><tuv xml:lang=\"ru\">\<cr>\<tab><seg></seg>\<cr>\<bs>\<bs>\<bs>\<bs></tuv>\<cr>\<bs>\<bs>\<bs>\<bs></tu>\<esc>kkf>"
 endfunction
 
@@ -792,12 +794,19 @@ function! s:ReplaceInsideNearestQuotes(replace)
     return @@
 endfunction
 
+let s:app = '~/lb/lbview/web/app'
+let s:core = '~/lb/lbview/web/ext/src'
+
 let s:app = '~/lb/admin2/admin-2_0-oss/admin/public/app'
 let s:core = '~/lb/admin2/admin-2_0-oss/admin/public/ext/src'
-"let s:protected = '~/lb/20/client2/protected'
-"let s:protected = '~/lb/11/lbcore/phpclient/client2/protected/'
+
+let s:protected = '~/lb/20/client2/protected'
+let s:protected = '~/lb/11/lbcore/phpclient/client2/client/'
 let s:protected = '~/lb/admin2/admin-2_0-oss/admin'
+
 let s:backend = s:protected.'/controllers/api'
+
+let s:appname = 'LBView'
 let s:appname = 'OSS'
 
 function! s:GetBasePath(base)
@@ -834,7 +843,11 @@ endfunction
 
 function! s:OpenExtJSClass(ns)
     call <SID>SaveRegister()
-    let classname = a:ns.<SID>YankInQuotes()
+    let ns = a:ns
+    if ns != ''
+        let ns = s:appname.ns
+    endif
+    let classname = ns.<SID>YankInQuotes()
     let exploded = split(classname, '\.')
     let exploded[0] = <SID>GetBasePath(exploded[0])
     let path = join(exploded, '/').'.js'
