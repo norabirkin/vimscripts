@@ -52,20 +52,40 @@ nnoremap ;ce i/*]]>*/<esc>
 nnoremap ;lc :r!cp ~/lb/7/admin/soap.class.php .<cr>:e config.php<cr>ggoinclude_once('NBLogger.php');<esc>:w<cr>
 nnoremap ;ca :call<SID>CreateAccessor()<cr>
 nnoremap ;ls :call<SID>LoadSoap()<cr>
-nnoremap ;ou :w<cr>:e ~/lb/admin2/admin-2_0-oss/admin/runtime/vardump.log<cr>
+nnoremap ;ou :w<cr>:e ~/lb/lbweb-common/admin/runtime/vardump.log<cr>
 "nnoremap ;ou :e ~/lb/11/lbcore/phpclient/client2/registration/runtime/vardump.log<cr>
 "nnoremap ;od :e /home/anshakov/sbss/web/admin/features/SBSSListUploader/log/debug.log<cr>
-nnoremap ;od :e ~/lb/admin2/admin-2_0-oss/admin/runtime/details.log<cr>
+nnoremap ;od :e ~/lb/lbweb-common/admin/runtime/details.log<cr>
 "nnoremap ;od :e ~/lb/11/lbcore/phpclient/client2/registration/runtime/details.log<cr>
 "nnoremap ;od :e ~/lb/11/lbcore/phpclient/client2/protected/runtime/dev.log<cr>
 "nnoremap ;od :e ~/lb/20/admin/log/dev.log<cr>
-nnoremap ;oi :e ~/lb/admin2/admin-2_0-oss/admin/runtime/info.log<cr>
+nnoremap ;oi :e ~/lb/lbweb-common/admin/runtime/info.log<cr>
 "nnoremap ;oi :e ~/lb/11/lbcore/phpclient/client2/registration/runtime/info.log<cr>
-nnoremap ;of :e ~/lb/admin2/admin-2_0-oss/admin/config/develop/settings.php<cr>
+nnoremap ;of :e ~/lb/lbweb-common/admin/config/develop/settings.php<cr>
 nnoremap ;cc :call<SID>CreateComment()<cr>
-nnoremap ;aa :!/home/anshakov/tmps/regformcompile<cr>
-nnoremap ;az :!/home/anshakov/tmps/regformcompile_base<cr>
 nnoremap ;ch :!/home/anshakov/tmps/clearcache<cr>
+"nnoremap ;aa :call<SID>InitReplaceWithGetter()<cr>
+"nnoremap ;aa :!go install<cr>
+"nnoremap ;aa :!~/tmps/regformcompile<cr>
+"nnoremap ;aa :e ~/.tmp<cr>ggdG:r!sudo mysql sbss -psnkm77 < ~/tmps/findrequests<cr>:w<cr>
+nnoremap ;aa :!~/lb/lbweb-common/utils/lbwebcfg.php lbweb-admin /etc/lanbilling/phpclient/<cr>
+nnoremap ;az :!~/lb/lbweb-common/utils/lbwebcfg.php -d lbweb-admin /etc/lanbilling/phpclient/<cr>
+
+let s:classProp = ""
+let s:classPropGetter = ""
+
+function! s:InitReplaceWithGetter()
+    execute "normal!^ye"
+
+    let prop = @@
+    let s:classProp = "this.".prop
+    let prop = <SID>Capitalize(prop)
+    let getter = 'get'.prop
+    let s:classPropGetter = "this.".getter."()"
+    
+    execute "normal!:%s/".s:classProp."/".s:classPropGetter."/g\<cr>"
+
+endfunction
 
 function! s:Createarray()
     execute "normal!^dt$\"jyf=wv/;\<cr>\"ks'\<c-r>j' => \<esc>\jp"
@@ -137,16 +157,16 @@ function! s:CreateComment()
             execute "normal!".returnind."j"
             let existing = 1
         else
-            execute "normal!:".fnline."\<cr>O/**\<cr> * <{}>\<cr>*/"
+            execute "normal!:".fnline."\<cr>O/**\<cr> * <!}>\<cr>*/"
             let existing = 0
         endif
     else
-        execute "normal!O/**\<cr> * <{}>\<cr>*/"
+        execute "normal!O/**\<cr> * <!}>\<cr>*/"
         let existing = 0
     endif
     for item in vars
         let ln = line('.') - 1
-        call append(ln, '     * @param <{}> '.item.' <{}>')
+        call append(ln, '     * @param <!}> '.item.' <!}>')
     endfor
     let up = len(vars)
     if existing > 0
@@ -797,12 +817,13 @@ endfunction
 let s:app = '~/lb/lbview/web/app'
 let s:core = '~/lb/lbview/web/ext/src'
 
-let s:app = '~/lb/admin2/admin-2_0-oss/admin/public/app'
-let s:core = '~/lb/admin2/admin-2_0-oss/admin/public/ext/src'
+let s:app = '~/lb/lbweb-common/admin/public/app'
+let s:core = '~/lb/lbweb-common/admin/public/ext/src'
 
 let s:protected = '~/lb/20/client2/protected'
 let s:protected = '~/lb/11/lbcore/phpclient/client2/client/'
 let s:protected = '~/lb/admin2/admin-2_0-oss/admin'
+let s:protected = '~/lb/lbweb-common/admin/'
 
 let s:backend = s:protected.'/controllers/api'
 
